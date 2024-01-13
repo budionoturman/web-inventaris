@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\Pegawai;
+
+use App\Http\Controllers\Controller;
+use App\Models\Barang;
+use App\Models\Peminjaman;
+use App\Models\PeminjamanDetail;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+class PegawaiPeminjamanController extends Controller
+{
+    public function index()
+    {
+        $dataPeminjaman = Peminjaman::where('user_id', auth()->user()->id)
+                            ->where('status', '!=', 'sudah kembali')                
+        ->get();
+        
+        return view('pegawai/peminjaman/index', [
+            'peminjamans' => $dataPeminjaman,
+        ]);
+    }
+
+    public function create()
+    {
+        return view('pegawai/peminjaman/create', [
+            'pegawai' => auth()->user(),
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'status' => 'required',
+        ]);
+        $validatedData['tgl_pinjam'] = Carbon::now()->format('Y-m-d');
+        $validatedData['total'] = count($request->barang_id);
+
+        $peminjaman = Peminjaman::create($validatedData);
+
+        for($i = 0; $i < count($request->barang_id); $i++)
+        {
+            Barang::where('id', $request->barang_id[$i])->update(['status' => 'dipinjam']);
+            PeminjamanDetail::create([ 
+                'peminjam_id' => $peminjaman->id,
+                'barang_id' => $request->barang_id[$i],
+
+            ]);
+        }
+
+        return redirect('pegawai/peminjams')->with('success', 'Berhasil Melakukan Peminjaman');
+    }
+
+    public function history()
+    {
+        return view('pegawai/peminjaman/history', [
+            'peminjaman' => Peminjaman::where('status', 'sudah kembali')
+                            -> where('user_id', auth()->user()->id)
+                            ->get()
+        ]);
+    }
+}
