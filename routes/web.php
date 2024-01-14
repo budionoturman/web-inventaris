@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/barangs', BarangController::class);
     Route::resource('/peminjams', PeminjamanController::class);
     Route::any('/proses/{id}',[PeminjamanController::class, 'proses']);
+    Route::any('/batalkan/{id}',[PeminjamanController::class, 'batalkan']);
 
     Route::get('pengembalians', [PengembalianController::class, 'index']);
     Route::any('kembalikan/{id}',[PengembalianController::class, 'kembalikan']);

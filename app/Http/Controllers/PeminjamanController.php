@@ -95,10 +95,23 @@ class PeminjamanController extends Controller
 
     public function proses($id)
     {
-        $peminjam = Peminjaman::findOrFail($id);
-        $peminjam->status = "belum kembali";
-        $peminjam->save();
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->status = "belum kembali";
+        $peminjaman->save();
 
-        return redirect('/peminjams');
+        return redirect('/peminjams')->with('success', 'Peminjaman Berhasil Diproses');
+    }
+
+    public function batalkan($id)
+    {
+        $peminjamanDetail = PeminjamanDetail::findOrFail($id);
+        Barang::where('id', $peminjamanDetail->barang_id)
+                ->update([
+                    'status' => 'tersedia'
+                ]);
+        Peminjaman::destroy($id);
+        PeminjamanDetail::destroy($id);
+
+        return redirect('/peminjams')->with('success', 'Peminjaman Berhasil Dibatalkan');
     }
 }

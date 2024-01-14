@@ -66,7 +66,9 @@
                                         <th>No.</th>
                                         <th>Nama Barang</th>
                                         <th>Kode Barang</th>
-                                        <th>status</th>
+                                        <th>Status</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Kondisi</th>
                                         <th>Kategori</th>
                                         @can('isStaffGudang')
                                             <th>Aksi</th>
@@ -80,6 +82,8 @@
                                             <td>{{ $barang->barang_name }}</td>
                                             <td>{{ $barang->barang_code }}</td>
                                             <td>{{ $barang->status }}</td>
+                                            <td>{{ $barang->tgl_masuk }}</td>
+                                            <td>{{ $barang->kondisi }}</td>
                                             <td>{{ $barang->kategori->kategori_name }}</td>
                                             @can('isStaffGudang')
                                                 <td class="d-flex inline">

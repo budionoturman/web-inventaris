@@ -5,6 +5,14 @@
             <div class="col-lg-12 d-flex align-items-stretch">
                 <div class="card w-100">
                     <div class="card-body p-4">
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
                             @can('isStaffGudang')
@@ -68,6 +76,9 @@
                                                         <a href="/proses/{{ $peminjaman->id }}">
                                                             <button type="button"
                                                                 class="btn btn-success m-1">{{ $peminjaman->status }}</button>
+                                                        </a>
+                                                        <a href="/batalkan/{{ $peminjaman->id }}">
+                                                            <button type="button" class="btn btn-danger m-1">Batalkkan</button>
                                                         </a>
                                                     @else
                                                         <button class="btn btn-success m-1">{{ $peminjaman->status }}</button>
