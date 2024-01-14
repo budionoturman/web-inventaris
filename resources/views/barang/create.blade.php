@@ -14,15 +14,9 @@
                                 <select class="form-control selectkategori select2" id="kategori_id selectkategori"
                                     name="kategori_id" required>
                                     @foreach ($kategoris as $kategori)
-                                        @if (old('kategori_id') == $kategori->id)
-                                            <option value="{{ $kategori->id }}">
-                                                {{ $kategori->kategori_name }}
-                                            </option>
-                                        @else
-                                            <option value="{{ $kategori->id }}">
-                                                {{ $kategori->kategori_name }}
-                                            </option>
-                                        @endif
+                                        <option value="{{ $kategori->id }}">
+                                            {{ $kategori->kategori_name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

@@ -35,9 +35,19 @@
                                     value="{{ old('kategori_id', $barangs->kategori->kategori_name) }}" disabled readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="status" class="form-label">Nama Barang</label>
-                                <input type="text" class="form-control" name="status" id="status"
-                                    value="{{ old('status', $barangs->status) }}" required>
+                                <label for="status" class="form-label">Status Barang</label>
+                                <select class="form-control  " id="status " name="status" required>
+                                    <option value="tersedia"> Tersedia </option>
+                                    <option value="dipinjam"> Dipinjam </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kondisi" class="form-label">Nama Barang</label>
+                                <select class="form-control  " id="kondisi " name="kondisi" required>
+                                    <option value="baik"> Baik </option>
+                                    <option value="rusak"> Rusak </option>
+                                    <option value="hilang"> Hilang </option>
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>

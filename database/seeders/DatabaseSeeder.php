@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Kepala Sekolah',
             'username' => 'kepalasekolah',
             'password' => bcrypt('smkavicena'),
+            'nip' => '09876541',
             'no_hp' => '089123456789',
             'role_id' => 1
         ]);
@@ -53,6 +54,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Kepala Staff',
             'username' => 'kepalastaff',
             'password' => bcrypt('smkavicena'),
+            'nip' => '09876542',
             'no_hp' => '089123456789',
             'role_id' => 2
         ]);
@@ -61,6 +63,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Staff Gudang',
             'username' => 'staffgudang',
             'password' => bcrypt('smkavicena'),
+            'nip' => '09876543',
             'no_hp' => '089123456789',
             'role_id' => 3
         ]);
@@ -69,6 +72,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Eko Budiono',
             'username' => 'ekobudiono',
             'password' => bcrypt('smkavicena'),
+            'nip' => '09876544',
             'no_hp' => '089123456789',
             'role_id' => 4
         ]);
@@ -90,13 +94,13 @@ class DatabaseSeeder extends Seeder
 
         Kategori::create([
             'kategori_name' => 'Laptop',
-            'kategori_code' => 'lpt',
+            'kategori_code' => 'LTP',
             'jurusan_id' => 1,
         ]);
 
         Kategori::create([
             'kategori_name' => 'Monitor',
-            'kategori_code' => 'mnt',
+            'kategori_code' => 'MNR',
             'jurusan_id' => 1,
         ]);
         

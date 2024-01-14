@@ -7,7 +7,7 @@
                     <div class="card-body p-4">
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
-                            @can('isKepalaStaff')
+                            @can('isStaffGudang')
                                 <button type="button" class="btn btn-outline-secondary m-1">
                                     <a href="/peminjams/create"> Tambah</a>
                                 </button>
@@ -38,7 +38,7 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
-                                        @canany(['isKepalaStaff', 'isStaffGudang'])
+                                        @canany(['isStaffGudang'])
                                             <th class="border-bottom-0">
                                                 <h6 class="fw-semibold mb-0 text-center">Aksi</h6>
                                             </th>
@@ -60,18 +60,20 @@
                                             <td>{{ $peminjaman->tgl_pinjam }}</td>
                                             <td>{{ $peminjaman->tgl_kembali }}</td>
                                             <td>{{ $peminjaman->status }}</td>
-                                            <td>
-                                                @if ($peminjaman->status === 'belum kembali')
-                                                    <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
-                                                @elseif($peminjaman->status === 'proses')
-                                                    <a href="/proses/{{ $peminjaman->id }}">
-                                                        <button type="button"
-                                                            class="btn btn-success m-1">{{ $peminjaman->status }}</button>
-                                                    </a>
-                                                @else
-                                                    <button class="btn btn-success m-1">{{ $peminjaman->status }}</button>
-                                                @endif
-                                            </td>
+                                            @can('isStaffGudang')
+                                                <td>
+                                                    @if ($peminjaman->status === 'belum kembali')
+                                                        <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
+                                                    @elseif($peminjaman->status === 'proses')
+                                                        <a href="/proses/{{ $peminjaman->id }}">
+                                                            <button type="button"
+                                                                class="btn btn-success m-1">{{ $peminjaman->status }}</button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-success m-1">{{ $peminjaman->status }}</button>
+                                                    @endif
+                                                </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
                                 </tbody>

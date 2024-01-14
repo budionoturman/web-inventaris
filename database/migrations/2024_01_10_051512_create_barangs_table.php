@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('barang_code')->unique();
             $table->string('barang_name');
             $table->string('status');
+            $table->string('kondisi');
+            $table->string('tgl_masuk');
             $table->foreignId('kategori_id');
             $table->timestamps();
         });

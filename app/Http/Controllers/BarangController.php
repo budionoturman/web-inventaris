@@ -42,15 +42,10 @@ class BarangController extends Controller
         $kodeJurusan = $getJurusanData->jurusan_code;
         $kodekategori = $getkategoriData->kategori_code;
 
-        $tahun = Carbon::now('Y');
-        $AWAL = 'BRG';
-        $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
         $noUrutAkhir = Barang::max('id');
         $no = "0".$noUrutAkhir + 1;
 
-        $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no . '/' . $AWAL . '/' . $bulanRomawi[date('n')] . '/' . $tahun->year;
-
-        
+        $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no;
         //create code barang end
 
         $validatedData = $request->validate([
@@ -60,6 +55,8 @@ class BarangController extends Controller
 
         $validatedData['barang_code'] = $kodeBarangFix;
         $validatedData['status'] = 'tersedia';
+        $validatedData['kondisi'] = 'baik';
+        $validatedData['tgl_masuk'] = Carbon::now()->format('Y-m-d');
 
         Barang::create($validatedData);
         return redirect('barangs')->with('success', 'Berhasil Menambahkan Barang');
@@ -93,7 +90,8 @@ class BarangController extends Controller
             'barang_name' => 'required',
             'barang_code' => 'required',
             'kategori_id' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'kondisi' => 'required',
         ]);
 
         Barang::where('id', $barang->id)->update($validatedData);

@@ -13,11 +13,6 @@
                     <div class="card-body p-4">
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
-                            {{-- @can('isAdmin')
-                                <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/pengembalian/"> Tambah</a>
-                                </button>
-                            @endcan --}}
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
@@ -46,11 +41,6 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
-                                        @can('isKepalaStaff')
-                                            <th class="border-bottom-0">
-                                                <h6 class="fw-semibold mb-0 text-center">Aksi</h6>
-                                            </th>
-                                        @endcan
                                         @can('isStaffGudang')
                                             <th class="border-bottom-0">
                                                 <h6 class="fw-semibold mb-0 text-center">Aksi</h6>
@@ -75,28 +65,11 @@
                                             <td>
                                                 <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                             </td>
-                                            @can('isKepalaStaff')
-                                                <td class="text-center d-flex inline justify-content-center">
-                                                    <a href="/kembalikan/{{ $peminjaman->id }}">
-                                                        <button type="button" class="btn btn-success m-1">Kembalikan</button>
-                                                    </a>
-                                                    {{-- <form action="/pengembalian/{{ $peminjaman->id }}/edit" method="post">
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="btn btn-outline-danger m-1">kembalikan</button>
-                                                </form> --}}
-                                                </td>
-                                            @endcan
                                             @can('isStaffGudang')
                                                 <td class="text-center d-flex inline justify-content-center">
                                                     <a href="/kembalikan/{{ $peminjaman->id }}">
                                                         <button type="button" class="btn btn-success m-1">Kembalikan</button>
                                                     </a>
-                                                    {{-- <form action="/pengembalian/{{ $peminjaman->id }}/edit" method="post">
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="btn btn-outline-danger m-1">kembalikan</button>
-                                                </form> --}}
                                                 </td>
                                             @endcan
                                         </tr>

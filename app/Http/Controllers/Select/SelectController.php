@@ -76,11 +76,13 @@ class SelectController extends Controller
             $search = $request->q;
             $barang =Barang::select("id", "barang_name")
                     ->where('status', 'tersedia')
+                    ->where('kondisi', 'baik')
                     ->where('barang_name', 'LIKE', "%$search%")
                     ->get();
         }else{ 
             $barang =Barang::select("id", "barang_name")->orderBy('id')
                     ->where('status', 'tersedia')
+                    ->where('kondisi', 'baik')
                     ->get();
         }
         return $barang;
