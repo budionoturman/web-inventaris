@@ -76,6 +76,15 @@ class DatabaseSeeder extends Seeder
             'no_hp' => '089123456789',
             'role_id' => 4
         ]);
+        
+        User::create([
+            'name' => 'Ahmad Irgi Firdaus',
+            'username' => 'ahmadirgi',
+            'password' => bcrypt('smkavicena'),
+            'nip' => '09876545',
+            'no_hp' => '089123456788',
+            'role_id' => 4
+        ]);
 
         Jurusan::create([
             'jurusan_name' => 'Teknik Komputer dan Jaringan',
