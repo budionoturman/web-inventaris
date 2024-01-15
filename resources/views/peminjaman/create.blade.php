@@ -67,6 +67,11 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
+                                    <input type="date" class="form-control" name="tgl_pinjam" id="tgl_pinjam" required>
+                                </div>
+
+                                <div class="mb-3">
                                     <input type="hidden" class="form-control" name="status" id="status" value="proses">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -79,7 +84,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-    <script>
+    <script type="text/javascript">
         $(function() {
             var dtToday = new Date();
 
@@ -93,7 +98,7 @@
 
             var minDate = year + '-' + month + '-' + day;
 
-            $('#tgl_pjm').attr('min', minDate);
+            $('#tgl_pinjam').attr('min', minDate);
         });
 
 

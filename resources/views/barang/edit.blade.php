@@ -42,7 +42,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="kondisi" class="form-label">Nama Barang</label>
+                                <label for="kondisi" class="form-label">Kondisi Barang</label>
                                 <select class="form-control  " id="kondisi " name="kondisi" required>
                                     <option value="baik"> Baik </option>
                                     <option value="rusak"> Rusak </option>

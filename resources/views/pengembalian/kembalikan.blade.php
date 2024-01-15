@@ -42,7 +42,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="tgl_kembali" class="form-label">Tanggal Kembali</label>
-                                    <input type="date" class="form-control" name="tgl_kembali" id="tgl_kembali" required>
+                                    <input type="date" class="form-control" name="tgl_kembali" id="tgl_kembali"
+                                        min="{{ $tgl_pinjam }}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="no_hp" class="form-label">Denda</label>
@@ -61,8 +62,6 @@
         <script type="text/javascript">
             $(document).ready(function() {
 
-                //var end = moment($("#tgl_kmb").val());
-
                 var totalBarang = {{ $totalBarang }};
 
                 $("#tgl_kembali").change(function() {
@@ -77,7 +76,6 @@
                     $("#denda").val(denda);
                     console.log(denda);
                 });
-
             });
         </script>
     @endsection

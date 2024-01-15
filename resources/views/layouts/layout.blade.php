@@ -210,7 +210,7 @@
             <!--  Main wrapper -->
             <div class="body-wrapper">
                 <!--  Header Start -->
-                <header class="app-header">
+                <header class="app-header" style="margin-top: -16px; margin-left: -10px">
                     <nav class="navbar navbar-expand-lg navbar-light shadow rounded">
                         <ul class="navbar-nav">
                             <li class="nav-item d-block d-xl-none">

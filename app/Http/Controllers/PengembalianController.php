@@ -10,8 +10,13 @@ class PengembalianController extends Controller
 {
     public function index()
     {
+        $peminjamans = Peminjaman::where(function($query){
+                            $query->where('status', 'LIKE', 'belum kembali')
+                            ->orWhere('status', 'LIKE', 'kembali sebagian');
+                        })->get();
+                        
         return view('pengembalian/index', [
-            'peminjamans' => Peminjaman::where('status', 'like', 'belum kembali')->get(),
+            'peminjamans' => $peminjamans
         ]);
     }
 
@@ -40,10 +45,7 @@ class PengembalianController extends Controller
          $peminjam->denda = $request->denda;
          $peminjam->status = "sudah kembali";
          $peminjam->save();
-
-        
- 
-
+         
          return redirect('/pengembalians')->with('success', 'Berhasil Mengembalikan Barang');
     }
 
