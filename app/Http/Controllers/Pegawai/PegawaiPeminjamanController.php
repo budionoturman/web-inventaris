@@ -26,11 +26,17 @@ class PegawaiPeminjamanController extends Controller
     {
         return view('pegawai/peminjaman/create', [
             'pegawai' => auth()->user(),
+            'barangs' => Barang::where('status', 'like', 'tersedia')->get()
         ]);
     }
 
     public function store(Request $request)
     {
+        if ($request->barang_id === null){
+            return back()->with("success", "Pilih Barang Terlebih Dahulu");
+        } elseif (count($request->barang_id) > 3) {
+            return back()->with("success", "Barang Tidak Boleh Lebih Dari 3");
+        }
         $validatedData = $request->validate([
             'user_id' => 'required',
             'status' => 'required',
