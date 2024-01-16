@@ -8,13 +8,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Form Peminjaman Barang</h5>
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="/peminjams" method="post">
-                                @csrf
+            <form action="/peminjams" method="post">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Form Peminjaman Barang</h5>
+                        <div class="card">
+                            <div class="card-body">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Pegawai</label>
                                     <select id="user_id" name="user_id" class="form-control selectpegawai select2"
@@ -32,55 +32,62 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Barang 1</label>
-                                            <select id="barang" name="barang_id[]"
-                                                class="form-control selectbarang select2" required>
+                            </div>
+                        </div>
 
-                                            </select>
-                                        </div>
+
+                        <div class="card" id="barang3">
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Barang</label>
+                                    <div class="table-responsive">
+                                        <table class="table text-nowrap mb-0 align-middle" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Kode Barang</th>
+                                                    <th>Kategori</th>
+                                                    <th>Pilih</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($barangs as $barang)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $barang->barang_name }}</td>
+                                                        <td>{{ $barang->barang_code }}</td>
+                                                        <td>{{ $barang->kategori->kategori_name }}</td>
+                                                        <td>
+                                                            <div class="form-check" @required(true)>
+                                                                <input class="form-check-input " type="checkbox"
+                                                                    value="{{ $barang->id }}" name="barang_id[]"
+                                                                    id="flexCheckDefault">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Barang 2</label>
-                                            <select id="barang1" name="barang_id[]"
-                                                class="form-control selectbarang select2" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="mb-3">
+                            <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
+                            <input type="date" class="form-control" name="tgl_pinjam" id="tgl_pinjam" required>
+                        </div>
 
-                                <div class="card" id="barang3">
-                                    <div class="card-body">
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Barang 3</label>
-                                            <select id="barang2" name="barang_id[]"
-                                                class="form-control selectbarang select2" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
-                                    <input type="date" class="form-control" name="tgl_pinjam" id="tgl_pinjam" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <input type="hidden" class="form-control" name="status" id="status" value="proses">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" name="status" id="status" value="proses">
                         </div>
                     </div>
                 </div>
-            </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>

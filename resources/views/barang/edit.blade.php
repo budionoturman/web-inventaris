@@ -46,6 +46,7 @@
                                 <select class="form-control  " id="kondisi " name="kondisi" required>
                                     <option value="baik"> Baik </option>
                                     <option value="rusak"> Rusak </option>
+                                    <option value="rusak berat"> Rusak Berat</option>
                                     <option value="hilang"> Hilang </option>
                                 </select>
                             </div>

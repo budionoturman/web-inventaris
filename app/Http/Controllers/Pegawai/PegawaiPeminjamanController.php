@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Peminjaman;
 use App\Models\PeminjamanDetail;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PegawaiPeminjamanController extends Controller
@@ -24,9 +23,13 @@ class PegawaiPeminjamanController extends Controller
 
     public function create()
     {
+        $dataBarang = Barang::where('status', 'LIKE', 'tersedia')
+                    ->where('kondisi', 'LIKE', 'baik')
+                    ->get();
+
         return view('pegawai/peminjaman/create', [
             'pegawai' => auth()->user(),
-            'barangs' => Barang::where('status', 'like', 'tersedia')->get()
+            'barangs' => $dataBarang
         ]);
     }
 
