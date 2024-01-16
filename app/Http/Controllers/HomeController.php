@@ -22,7 +22,7 @@ class HomeController extends Controller
 
 
         return view('index',[
-            'barangs' => Barang::all(),
+            'barangs' => Barang::where('status', 'like', "tersedia")->get(),
             'peminjamans' => Peminjaman::all(),
             'jumlahTkj' => $jumlahTkj,
             'jumlahTo' => $jumlahTo,
