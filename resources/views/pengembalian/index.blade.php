@@ -65,19 +65,30 @@
                                             <td>
                                                 <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                             </td>
-                                            @can('isStaffGudang')
-                                                <td class="text-center d-flex inline justify-content-center">
-                                                    <a href="/kembalikan/{{ $peminjaman->id }}">
-                                                        <button type="button" class="btn btn-success m-1">Kembalikan</button>
-                                                    </a>
-                                                </td>
-                                            @endcan
+                                            @if ($peminjaman->total == 1)
+                                                @can('isStaffGudang')
+                                                    <td class="text-center d-flex inline justify-content-center">
+                                                        <a href="/kembalikan/{{ $peminjaman->id }}">
+                                                            <button type="button"
+                                                                class="btn btn-success m-1">Kembalikan</button>
+                                                        </a>
+                                                    </td>
+                                                @endcan
+                                            @elseif ($peminjaman->total == 2)
+                                                @can('isStaffGudang')
+                                                    <td class="text-center d-flex inline justify-content-center">
+                                                        <a href="/kembalikan/{{ $peminjaman->id }}?=1">
+                                                            <button type="button"
+                                                                class="btn btn-success m-1">Kembalikan</button>
+                                                        </a>
+                                                    </td>
+                                                @endcan
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        </table>
                     </div>
                 </div>
             </div>
