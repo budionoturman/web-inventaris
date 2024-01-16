@@ -21,6 +21,11 @@
                                     <a href="/kategoris/create"> Tambah</a>
                                 </button>
                             @endcan
+                            @can('isStaffGudang')
+                                <button type="button" class="btn btn-outline-secondary m-1">
+                                    <a href="/kategoris/create"> Tambah</a>
+                                </button>
+                            @endcan
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">

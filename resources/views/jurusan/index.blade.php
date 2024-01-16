@@ -23,6 +23,13 @@
                                     Tambah
                                 </button>
                             @endcan
+                            @can('isStaffGudang')
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-outline-secondary m-1" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Tambah
+                                </button>
+                            @endcan
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
