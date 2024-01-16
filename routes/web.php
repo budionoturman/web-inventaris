@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KondisiBarangController;
 use App\Http\Controllers\Pegawai\PegawaiPeminjamanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/jurusans', JurusanController::class);
     Route::resource('/kategoris', KategoriController::class);
     Route::resource('/barangs', BarangController::class);
+
     Route::resource('/peminjams', PeminjamanController::class);
     Route::any('/proses/{id}',[PeminjamanController::class, 'proses']);
     Route::any('/batalkan/{id}',[PeminjamanController::class, 'batalkan']);
@@ -46,6 +48,8 @@ Route::middleware('auth')->group(function() {
     Route::any('kembalikan/{id}',[PengembalianController::class, 'kembalikan']);
     Route::any('storekembali', [PengembalianController::class, 'storekembali']);
     Route::get('history', [PengembalianController::class, 'history']);
+
+    Route::get('kondisi-barangs', [KondisiBarangController::class, 'index']);
 });
 
 // route pegawai
