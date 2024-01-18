@@ -56,7 +56,7 @@
                                             <td>{{ $peminjaman->user->no_hp }}</td>
                                             <td> <?php
                                             foreach ($peminjaman->barang as $brg) {
-                                                echo $brg->barang_name . '<br>';
+                                                echo $brg->barang_name . ' (' . $brg->pivot->status . ')' . '<br>';
                                             }
                                             ?>
                                             </td>
@@ -66,23 +66,23 @@
                                                 <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                             </td>
                                             @if ($peminjaman->total == 1)
-                                                @can('isStaffGudang')
-                                                    <td class="text-center d-flex inline justify-content-center">
+                                                <td class="text-center d-flex inline justify-content-center">
+                                                    @can('isStaffGudang')
                                                         <a href="/kembalikan/{{ $peminjaman->id }}">
                                                             <button type="button"
                                                                 class="btn btn-success m-1">Kembalikan</button>
                                                         </a>
-                                                    </td>
-                                                @endcan
-                                            @elseif ($peminjaman->total == 2)
-                                                @can('isStaffGudang')
-                                                    <td class="text-center d-flex inline justify-content-center">
-                                                        <a href="/kembalikan/{{ $peminjaman->id }}?=1">
+                                                    @endcan
+                                                </td>
+                                            @elseif ($peminjaman->total >= 2)
+                                                <td class="text-center d-flex inline justify-content-center">
+                                                    @can('isStaffGudang')
+                                                        <a href="/kembalikan/{{ $peminjaman->id }}">
                                                             <button type="button"
                                                                 class="btn btn-success m-1">Kembalikan</button>
                                                         </a>
-                                                    </td>
-                                                @endcan
+                                                    @endcan
+                                                </td>
                                             @endif
                                         </tr>
                                     @endforeach

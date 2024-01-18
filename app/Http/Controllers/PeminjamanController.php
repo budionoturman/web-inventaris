@@ -28,9 +28,13 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
+        $dataBarang = Barang::where('status', 'LIKE', 'tersedia')
+                    ->where('kondisi', 'LIKE', 'baik')
+                    ->get();
+                    
         return view('peminjaman/create', [
             'pegawai' => User::where('role_id', 4)->get(),
-            'barangs' => Barang::all(),
+            'barangs' => $dataBarang,
         ]);
     }
 
@@ -39,12 +43,18 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->barang_id === null){
+            return back()->with("success", "Pilih Barang Terlebih Dahulu");
+        } elseif (count($request->barang_id) > 3) {
+            return back()->with("success", "Barang Tidak Boleh Lebih Dari 3");
+        }
         $validatedData = $request->validate([
             'user_id' => 'required',
             'status' => 'required',
         ]);
         $validatedData['tgl_pinjam'] = Carbon::now()->format('Y-m-d');
         $validatedData['total'] = count($request->barang_id);
+        $validatedData['jumlah_kembali'] = 0;
 
         $peminjaman = Peminjaman::create($validatedData);
 
@@ -54,7 +64,7 @@ class PeminjamanController extends Controller
             PeminjamanDetail::create([ 
                 'peminjam_id' => $peminjaman->id,
                 'barang_id' => $request->barang_id[$i],
-
+                'status' => 'belum kembali'
             ]);
         }
 
@@ -104,13 +114,15 @@ class PeminjamanController extends Controller
 
     public function batalkan($id)
     {
-        $peminjamanDetail = PeminjamanDetail::findOrFail($id);
-        Barang::where('id', $peminjamanDetail->barang_id)
-                ->update([
-                    'status' => 'tersedia'
-                ]);
+        $peminjaman = Peminjaman::with('peminjaman_detail')->where('id', $id)->first();
+        
+        for($i = 0; $i < count($peminjaman->peminjaman_detail); $i++)
+        {
+            Barang::where('id', $peminjaman->peminjaman_detail[$i]->barang_id)
+                    ->update(['status' => 'tersedia']);
+        }
         Peminjaman::destroy($id);
-        PeminjamanDetail::destroy($id);
+        PeminjamanDetail::destroy('peminjam_id', $id);
 
         return redirect('/peminjams')->with('success', 'Peminjaman Berhasil Dibatalkan');
     }

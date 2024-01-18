@@ -2,63 +2,66 @@
 @section('container')
     <div class="container-fluid">
         <div class="row">
-            <div class="row-lg-12 d-flex align-items-stretch">
-                <div class="mx-4">
-                    <div class="card" style="width: 18rem; mx-10;">
-                        <img src="https://www.quipper.com/id/blog/wp-content/uploads/2022/09/Teknik-Komputer-Jaringan.webp"
-                            class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Barang</h5>
-                            <p class="card-text">
-                                Teknik Komputer Jaringan :
-                                @if (is_null($jumlahTkj))
-                                    0
-                                @else
-                                    {{ $jumlahTkj }}
-                                @endif
-                            </p>
+            @canany(['isKepalaSekolah', 'isKepalaStaff', 'isStaffGudang'])
+                <div class="row-lg-12 d-flex align-items-stretch">
+                    <div class="mx-4">
+                        <div class="card" style="width: 18rem; mx-10;">
+                            <img src="https://www.quipper.com/id/blog/wp-content/uploads/2022/09/Teknik-Komputer-Jaringan.webp"
+                                class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
+                            <div class="card-body">
+                                <h5 class="card-title">Jumlah Barang</h5>
+                                <p class="card-text">
+                                    Teknik Komputer Jaringan :
+                                    @if (is_null($jumlahTkj))
+                                        0
+                                    @else
+                                        {{ $jumlahTkj }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-4">
+                        <div class="card" style="width: 18rem; mx-10;">
+                            <img src="https://i.pinimg.com/736x/47/55/2c/47552cff6c11d9fb901a904c48b823ee.jpg"
+                                class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
+                            <div class="card-body">
+                                <h5 class="card-title">Jumlah Barang</h5>
+                                <p class="card-text">
+                                    Teknik Otomotif :
+                                    @if (is_null($jumlahTo))
+                                        0
+                                    @else
+                                        {{ $jumlahTo }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-4">
+                        <div class="card" style="width: 18rem; mx-10;">
+                            <img src="https://img.freepik.com/premium-vector/minimal-multimedia-logo-template_416562-755.jpg?w=740"
+                                class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
+                            <div class="card-body">
+                                <h5 class="card-title">Jumlah Barang</h5>
+                                <p class="card-text">
+                                    Multimedia :
+                                    @if (is_null($jumlahMm))
+                                        0
+                                    @else
+                                        {{ $jumlahMm }}
+                                    @endif
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mx-4">
-                    <div class="card" style="width: 18rem; mx-10;">
-                        <img src="https://i.pinimg.com/736x/47/55/2c/47552cff6c11d9fb901a904c48b823ee.jpg"
-                            class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Barang</h5>
-                            <p class="card-text">
-                                Teknik Otomotif :
-                                @if (is_null($jumlahTo))
-                                    0
-                                @else
-                                    {{ $jumlahTo }}
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mx-4">
-                    <div class="card" style="width: 18rem; mx-10;">
-                        <img src="https://img.freepik.com/premium-vector/minimal-multimedia-logo-template_416562-755.jpg?w=740"
-                            class="img-thumbnail" alt="..." style="widows: 100px; height:250px">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Barang</h5>
-                            <p class="card-text">
-                                Multimedia :
-                                @if (is_null($jumlahMm))
-                                    0
-                                @else
-                                    {{ $jumlahMm }}
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endcanany
+
             <div class="col-lg-12 d-flex align-items-stretch">
                 <div class="card w-100">
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-semibold mb-4">Data Barang Inventaris</h5>
+                        <h5 class="card-title fw-semibold mb-4">Data Barang Tersedia Inventaris</h5>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
                                 <thead>
@@ -66,9 +69,6 @@
                                         <th>No.</th>
                                         <th>Nama Barang</th>
                                         <th>Kode Barang</th>
-                                        <th>Status</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>Kondisi</th>
                                         <th>Kategori</th>
                                         @can('isStaffGudang')
                                             <th>Aksi</th>
@@ -81,9 +81,6 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $barang->barang_name }}</td>
                                             <td>{{ $barang->barang_code }}</td>
-                                            <td>{{ $barang->status }}</td>
-                                            <td>{{ $barang->tgl_masuk }}</td>
-                                            <td>{{ $barang->kondisi }}</td>
                                             <td>{{ $barang->kategori->kategori_name }}</td>
                                             @can('isStaffGudang')
                                                 <td class="d-flex inline">

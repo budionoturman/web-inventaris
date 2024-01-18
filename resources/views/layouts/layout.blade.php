@@ -14,10 +14,6 @@
         <link rel="stylesheet" href="{{ asset('css') }}/main.css?v=<?php echo time(); ?>">
         {{-- datatables --}}
         <link rel="stylesheet" href="{{ asset('admin-ui') }}/src/datatables/dataTables.bootstrap4.css">
-
-
-
-
     </head>
 
     <body>
@@ -51,18 +47,9 @@
                                         <span>
                                             <i class="ti ti-layout-dashboard"></i>
                                         </span>
-                                        <span class="hide-menu">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/barangs" aria-expanded="false">
-                                        <span>
-                                            <i class="fa-solid fa-computer"></i>
-                                        </span>
                                         <span class="hide-menu">Barang</span>
                                     </a>
                                 </li>
-
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="/pegawai/peminjams" aria-expanded="false">
                                         <span>
@@ -171,12 +158,21 @@
                                         <span class="hide-menu">History</span>
                                     </a>
                                 </li>
+
                                 <li class="nav-small-cap">
                                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                     <span class="hide-menu">Pengadaan</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/pengadaan" aria-expanded="false">
+                                    <a class="sidebar-link" href="/kondisi-barangs" aria-expanded="false">
+                                        <span>
+                                            <i class="fa-solid fa-computer"></i>
+                                        </span>
+                                        <span class="hide-menu">Kondisi Barang</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/pengadaans" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span>
@@ -184,7 +180,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/stok" aria-expanded="false">
+                                    <a class="sidebar-link" href="/stoks" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-boxes-stacked"></i>
                                         </span>

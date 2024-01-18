@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Peminjaman;
 use App\Models\PeminjamanDetail;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PegawaiPeminjamanController extends Controller
@@ -24,13 +23,23 @@ class PegawaiPeminjamanController extends Controller
 
     public function create()
     {
+        $dataBarang = Barang::where('status', 'LIKE', 'tersedia')
+                    ->where('kondisi', 'LIKE', 'baik')
+                    ->get();
+
         return view('pegawai/peminjaman/create', [
             'pegawai' => auth()->user(),
+            'barangs' => $dataBarang
         ]);
     }
 
     public function store(Request $request)
     {
+        if ($request->barang_id === null){
+            return back()->with("success", "Pilih Barang Terlebih Dahulu");
+        } elseif (count($request->barang_id) > 3) {
+            return back()->with("success", "Barang Tidak Boleh Lebih Dari 3");
+        }
         $validatedData = $request->validate([
             'user_id' => 'required',
             'status' => 'required',

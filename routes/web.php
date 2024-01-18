@@ -5,8 +5,10 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KondisiBarangController;
 use App\Http\Controllers\Pegawai\PegawaiPeminjamanController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\Select\SelectController;
 use App\Http\Controllers\UserController;
@@ -38,6 +40,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/jurusans', JurusanController::class);
     Route::resource('/kategoris', KategoriController::class);
     Route::resource('/barangs', BarangController::class);
+
     Route::resource('/peminjams', PeminjamanController::class);
     Route::any('/proses/{id}',[PeminjamanController::class, 'proses']);
     Route::any('/batalkan/{id}',[PeminjamanController::class, 'batalkan']);
@@ -46,6 +49,14 @@ Route::middleware('auth')->group(function() {
     Route::any('kembalikan/{id}',[PengembalianController::class, 'kembalikan']);
     Route::any('storekembali', [PengembalianController::class, 'storekembali']);
     Route::get('history', [PengembalianController::class, 'history']);
+
+    Route::get('kondisi-barangs', [KondisiBarangController::class, 'index']);
+    Route::get('kondisi-barangs/{id}/perbaikan', [KondisiBarangController::class, 'perbaikan']);
+    Route::put('kondisi-barangs/{id}', [KondisiBarangController::class, 'saveperbaikan']);
+    Route::get('kondisi-barangs/{id}/tidak-perbaikan', [KondisiBarangController::class, 'tidakperbaikan']);
+    Route::put('kondisi-barangs/{id}/tambah-pengadaan', [KondisiBarangController::class, 'pengadaan']);
+
+    Route::get('pengadaans', [PengadaanController::class, 'index']);
 });
 
 // route pegawai

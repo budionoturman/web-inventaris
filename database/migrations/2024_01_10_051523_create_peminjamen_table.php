@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('tgl_pinjam');
             $table->string('tgl_kembali')->nullable();
             $table->string('status');
-            $table->string('total');
+            $table->integer('total');
+            $table->integer('jumlah_kembali')->nullable();
             $table->string('denda')->nullable();
             $table->timestamps();
         });
