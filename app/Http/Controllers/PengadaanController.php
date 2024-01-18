@@ -11,11 +11,16 @@ class PengadaanController extends Controller
     {
         $dataBarang = Barang::where(function($query){
             $query->where('kondisi', 'like', 'hilang')
-            ->orWhere('kondisi', 'like', 'pengadaan');
+            ->orWhere('status', 'like', 'rusak');
         })->get();
 
         return view('pengadaan/index', [
             'barangs' => $dataBarang
         ]);
+    }
+
+    public function create()
+    {
+        return 'create';
     }
 }

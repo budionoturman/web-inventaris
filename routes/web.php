@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function() {
     Route::resource('/jurusans', JurusanController::class);
     Route::resource('/kategoris', KategoriController::class);
     Route::resource('/barangs', BarangController::class);
+    
+    Route::get('/stoks', [BarangController::class, 'stok']);
 
     Route::resource('/peminjams', PeminjamanController::class);
     Route::any('/proses/{id}',[PeminjamanController::class, 'proses']);
@@ -57,6 +59,7 @@ Route::middleware('auth')->group(function() {
     Route::put('kondisi-barangs/{id}/tambah-pengadaan', [KondisiBarangController::class, 'pengadaan']);
 
     Route::get('pengadaans', [PengadaanController::class, 'index']);
+    Route::get('pengadaans/create', [PengadaanController::class, 'create']);
 });
 
 // route pegawai

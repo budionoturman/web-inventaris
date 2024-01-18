@@ -15,7 +15,13 @@
 
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Saran Pengadaan Barang</h5>
+                            @can('isStaffGudang')
+                                <button type="button" class="btn btn-outline-secondary m-1">
+                                    <a href="/pengadaans/create">Tambah</a>
+                                </button>
+                            @endcan
                         </div>
+
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
                                 <thead>
@@ -24,9 +30,9 @@
                                         <th>Nama Barang</th>
                                         <th>Kode Barang</th>
                                         <th>Kondisi</th>
-                                        @can('isStaffGudang')
+                                        {{-- @can('isStaffGudang')
                                             <th>Aksi</th>
-                                        @endcan
+                                        @endcan --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,14 +42,14 @@
                                             <td>{{ $barang->barang_name }}</td>
                                             <td>{{ $barang->barang_code }}</td>
                                             <td>{{ $barang->kondisi }}</td>
-                                            @can('isStaffGudang')
+                                            {{-- @can('isStaffGudang')
                                                 <td class="d-flex inline">
                                                     <a href="/pengadaans/{{ $barang->id }}/edit">
                                                         <button type="button" class="btn btn-outline-success m-1"><i
                                                                 class="fa-solid fa-pen-to-square"></i> Ajukan Pengadaan</button>
                                                     </a>
                                                 </td>
-                                            @endcan
+                                            @endcan --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -51,8 +51,8 @@ class PeminjamanController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'status' => 'required',
+            'tgl_pinjam' => 'required'
         ]);
-        $validatedData['tgl_pinjam'] = Carbon::now()->format('Y-m-d');
         $validatedData['total'] = count($request->barang_id);
         $validatedData['jumlah_kembali'] = 0;
 

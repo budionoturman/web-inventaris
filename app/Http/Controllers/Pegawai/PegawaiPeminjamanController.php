@@ -46,6 +46,7 @@ class PegawaiPeminjamanController extends Controller
             'tgl_pinjam' => 'required'
         ]);
         $validatedData['total'] = count($request->barang_id);
+        $validatedData['jumlah_kembali'] = 0;
 
         $peminjaman = Peminjaman::create($validatedData);
 
@@ -55,7 +56,7 @@ class PegawaiPeminjamanController extends Controller
             PeminjamanDetail::create([ 
                 'peminjam_id' => $peminjaman->id,
                 'barang_id' => $request->barang_id[$i],
-
+                'status' => 'belum kembali'
             ]);
         }
 
