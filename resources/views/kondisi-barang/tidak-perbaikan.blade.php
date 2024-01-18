@@ -9,10 +9,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <h5 class="card-title fw-semibold mb-4">Form Edit Barang</h5>
+                <h5 class="card-title fw-semibold mb-4">Tambah Pengadaan Barang</h5>
                 <div class="card">
                     <div class="card-body">
-                        <form action="/barangs/{{ $barangs->id }}" method="post">
+                        <form action="/kondisi-barangs/{{ $barangs->id }}/tambah-pengadaan" method="post">
                             @csrf
                             @method('put')
                             <div class="mb-3">
@@ -33,22 +33,6 @@
                                     value="{{ old('kategori_id', $barangs->kategori_id) }}" readonly>
                                 <input type="text" class="form-control" name="" id=""
                                     value="{{ old('kategori_id', $barangs->kategori->kategori_name) }}" disabled readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Status Barang</label>
-                                <select class="form-control  " id="status " name="status" required>
-                                    <option value="tersedia"> Tersedia </option>
-                                    <option value="dipinjam"> Dipinjam </option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="kondisi" class="form-label">Kondisi Barang</label>
-                                <select class="form-control  " id="kondisi " name="kondisi" required>
-                                    <option value="baik"> Baik </option>
-                                    <option value="rusak"> Rusak </option>
-                                    <option value="rusak berat"> Rusak Berat</option>
-                                    <option value="hilang"> Hilang </option>
-                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>

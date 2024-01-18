@@ -54,6 +54,7 @@ class PeminjamanController extends Controller
         ]);
         $validatedData['tgl_pinjam'] = Carbon::now()->format('Y-m-d');
         $validatedData['total'] = count($request->barang_id);
+        $validatedData['jumlah_kembali'] = 0;
 
         $peminjaman = Peminjaman::create($validatedData);
 
@@ -63,7 +64,7 @@ class PeminjamanController extends Controller
             PeminjamanDetail::create([ 
                 'peminjam_id' => $peminjaman->id,
                 'barang_id' => $request->barang_id[$i],
-
+                'status' => 'belum kembali'
             ]);
         }
 

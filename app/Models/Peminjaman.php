@@ -23,6 +23,6 @@ class Peminjaman extends Model
 
     public function barang()
     {
-        return $this->belongsToMany(Barang::class,'peminjaman_details', 'peminjam_id');
+        return $this->belongsToMany(Barang::class,'peminjaman_details', 'peminjam_id')->withPivot('status');
     }
 }
