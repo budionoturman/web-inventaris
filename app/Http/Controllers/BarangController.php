@@ -106,4 +106,12 @@ class BarangController extends Controller
         Barang::destroy($barang->id);
         return redirect('barangs')->with('success', 'Berhasil Menghapus Barang');
     }
+
+
+    public function stok() 
+    {
+        return view('barang/stok', [
+
+        ]);
+    }
 }

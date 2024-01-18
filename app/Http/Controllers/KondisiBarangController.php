@@ -51,6 +51,16 @@ class KondisiBarangController extends Controller
 
     public function pengadaan(Request $request, $id)
     {
-        return $id;
+        // return $request;
+        $validatedData = $request->validate([
+            'barang_name' => 'required',
+            'barang_code' => 'required',
+            'kategori_id' => 'required',
+        ]);
+        $validatedData['status'] = 'rusak';
+        $validatedData['kondisi'] = 'tidak dapat diperbaiki';
+
+        Barang::where('id', $id)->update($validatedData);
+        return redirect('kondisi-barangs')->with('success', 'Berhasil Update Barang');
     }
 }
