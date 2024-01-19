@@ -12,7 +12,7 @@
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama </label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="name" value="{{ old('name') }}">
+                                    name="name" id="name" value="{{ old('name') }}" required>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -22,7 +22,7 @@
                             <div class="mb-3">
                                 <label for="username" class="form-label">username </label>
                                 <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                    name="username" id="username" value="{{ old('username') }}">
+                                    name="username" id="username" value="{{ old('username') }}" required>
                                 @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -52,7 +52,7 @@
                             <div class="mb-3">
                                 <label for="no_hp" class="form-label">No. HP</label>
                                 <input type="number" class="form-control @error('no_hp') is-invalid @enderror"
-                                    name="no_hp" id="no_hp" value="{{ old('no_hp') }}">
+                                    name="no_hp" id="no_hp" value="{{ old('no_hp') }}" required>
                                 @error('no_hp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
