@@ -31,7 +31,13 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">pasword </label>
-                                <input type="text" class="form-control" name="password" id="password">
+                                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" id="password" required>
+                                @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="nip" class="form-label">NIP</label>
