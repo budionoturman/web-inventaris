@@ -4,12 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Barang;
 use App\Models\Jurusan;
 use App\Models\Kategori;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -111,6 +113,42 @@ class DatabaseSeeder extends Seeder
             'kategori_name' => 'Monitor',
             'kategori_code' => 'MNR',
             'jurusan_id' => 1,
+        ]);
+
+        Barang::create([
+            'barang_code' => 'TKJ/LTP/01',
+            'barang_name' => 'MSI Modern 14 B5M',
+            'status' => 'tersedia',
+            'kondisi' => 'baik',
+            'tgl_masuk' => Carbon::now()->format('Y-m-d'),
+            'kategori_id' => '1',
+        ]);
+
+        Barang::create([
+            'barang_code' => 'TKJ/LTP/02',
+            'barang_name' => 'MSI Modern 14 B5M',
+            'status' => 'rusak',
+            'kondisi' => 'tidak dapat diperbaiki',
+            'tgl_masuk' => Carbon::now()->format('Y-m-d'),
+            'kategori_id' => '1',
+        ]);
+
+        Barang::create([
+            'barang_code' => 'TKJ/LTP/03',
+            'barang_name' => 'MSI Modern 14 B5M',
+            'status' => 'rusak',
+            'kondisi' => 'tidak dapat diperbaiki',
+            'tgl_masuk' => Carbon::now()->format('Y-m-d'),
+            'kategori_id' => '1',
+        ]);
+
+        Barang::create([
+            'barang_code' => 'TKJ/LTP/04',
+            'barang_name' => 'MSI Modern 14 B5M',
+            'status' => 'rusak',
+            'kondisi' => 'tidak dapat diperbaiki',
+            'tgl_masuk' => Carbon::now()->format('Y-m-d'),
+            'kategori_id' => '1',
         ]);
         
     }
