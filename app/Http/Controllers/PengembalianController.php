@@ -57,7 +57,7 @@ class PengembalianController extends Controller
             $peminjam = Peminjaman::findOrFail($request->peminjam_id);
     
             $peminjam->tgl_kembali = $request->tgl_kembali;
-            $peminjam->denda = $request->denda;
+            $peminjam->denda += $request->denda;
             $peminjam->status = "sudah kembali";
             $peminjam->jumlah_kembali = count($request->barang_id)+$request->jumlah_kembali;
             $peminjam->save();
@@ -80,7 +80,7 @@ class PengembalianController extends Controller
             $peminjam = Peminjaman::findOrFail($request->peminjam_id);
     
             $peminjam->tgl_kembali = $request->tgl_kembali;
-            $peminjam->denda = $request->denda;
+            $peminjam->denda += $request->denda;
             $peminjam->status = "kembali sebagian";
             $peminjam->jumlah_kembali = count($request->barang_id)+$request->jumlah_kembali;
             $peminjam->save();

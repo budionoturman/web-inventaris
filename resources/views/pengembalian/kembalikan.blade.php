@@ -132,10 +132,14 @@
                 var totalBarang = {{ $totalBarang }};
 
                 $("#tgl_kembali").change(function() {
+
+                    var le = document.querySelectorAll('input[name="barang_id[]"]:checked').length;
+                    console.log(le);
+
                     var start = moment($("#tgl_pinjam").val());
                     var end = moment($("#tgl_kembali").val());
                     if (end.diff(start, "days") > 5) {
-                        var denda = (end.diff(start, "days") - 5) * 5000 * totalBarang;
+                        var denda = (end.diff(start, "days") - 5) * 5000 * le;
 
                     } else {
                         var denda = 0;
