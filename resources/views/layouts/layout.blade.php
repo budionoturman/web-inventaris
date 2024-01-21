@@ -180,11 +180,11 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/stoks" aria-expanded="false">
+                                    <a class="sidebar-link" href="/histories/pengadaan" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-boxes-stacked"></i>
                                         </span>
-                                        <span class="hide-menu">Stok Barang</span>
+                                        <span class="hide-menu">History Pengadaan</span>
                                     </a>
                                 </li>
                                 {{-- <li class="sidebar-item">

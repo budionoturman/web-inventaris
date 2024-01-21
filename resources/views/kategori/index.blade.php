@@ -16,16 +16,11 @@
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Data Jurusan</h5>
 
-                            @can('isKepalaStaff')
+                            @canany(['isKepalaStaff', 'isStaffGudang'])
                                 <button type="button" class="btn btn-outline-secondary m-1">
                                     <a href="/kategoris/create"> Tambah</a>
                                 </button>
-                            @endcan
-                            @can('isStaffGudang')
-                                <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/kategoris/create"> Tambah</a>
-                                </button>
-                            @endcan
+                            @endcanany
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">

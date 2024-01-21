@@ -12,6 +12,7 @@ use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\Select\SelectController;
 use App\Http\Controllers\UserController;
+use App\Models\Pengadaan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,12 @@ Route::middleware('auth')->group(function() {
 
     Route::get('pengadaans', [PengadaanController::class, 'index']);
     Route::get('pengadaans/create', [PengadaanController::class, 'create']);
+    Route::post('pengadaans', [PengadaanController::class, 'store']);
+    Route::get('pengadaans/{id}', [PengadaanController::class, 'show']);
+    Route::post('pengadaans/setujui/{id}', [PengadaanController::class, 'setujui']);
+    Route::post('pengadaans/tolak/{id}', [PengadaanController::class, 'tolak']);  
+    Route::get('pengadaans/cetak/{id}', [PengadaanController::class, 'cetak']);  
+    Route::get('histories/pengadaan', [PengadaanController::class, 'history']);
 });
 
 // route pegawai
