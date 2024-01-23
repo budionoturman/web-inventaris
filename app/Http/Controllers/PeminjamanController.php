@@ -119,8 +119,8 @@ class PeminjamanController extends Controller
             Barang::where('id', $peminjaman->peminjaman_detail[$i]->barang_id)
                     ->update(['status' => 'tersedia']);
         }
-        Peminjaman::destroy($id);
-        PeminjamanDetail::destroy('peminjam_id', $id);
+        Peminjaman::where('id', $id)->update(['status' => 'dibatalkan']);
+        PeminjamanDetail::where('peminjam_id', $id)->update(['status' => 'dibatalkan']);
 
         return redirect('/peminjams')->with('success', 'Peminjaman Berhasil Dibatalkan');
     }

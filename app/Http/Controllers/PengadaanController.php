@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pengadaan;
 use App\Models\PengadaanDetail;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -113,15 +112,5 @@ class PengadaanController extends Controller
         return view('pengadaan/history', [
             'pengadaans' => $dataPengadaan
         ]);
-    }
-
-    public function cetak($id)
-    {
-        $dataPengadaan = Pengadaan::findOrFail($id);
-
-        $pdf = PDF::loadView('pdf/cetak-pengadaan', [
-            'pengadaan' => $dataPengadaan, 
-        ]);
-        return $pdf->stream('pengadaan-'.$dataPengadaan->no_surat.'.pdf');
     }
 }

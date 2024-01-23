@@ -13,15 +13,22 @@
                             </div>
                         @endif --}}
 
-                        <div class="d-flex inline justify-content-between">
-                            <h5 class="card-title fw-semibold mb-4">Tabel Data Barang</h5>
-
-                            @can('isStaffGudang')
+                        <div class=" row justify-content-between">
+                            <div class="col">
+                                <h5 class="card-title fw-semibold mb-4">Tabel Data Barang</h5>
+                            </div>
+                            <div class="col text-end">
+                                @can('isStaffGudang')
+                                    <button type="button" class="btn btn-outline-secondary m-1">
+                                        <a href="/barangs/create">Tambah</a>
+                                    </button>
+                                @endcan
                                 <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/barangs/create">Tambah</a>
+                                    <a href="/barangs-cetak" target="_blank">Cetak</a>
                                 </button>
-                            @endcan
+                            </div>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
                                 <thead>

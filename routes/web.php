@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KondisiBarangController;
+use App\Http\Controllers\Pdf\PdfController;
 use App\Http\Controllers\Pegawai\PegawaiPeminjamanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengadaanController;
@@ -41,7 +42,6 @@ Route::middleware('auth')->group(function() {
     Route::resource('/jurusans', JurusanController::class);
     Route::resource('/kategoris', KategoriController::class);
     Route::resource('/barangs', BarangController::class);
-    Route::get('/barangs-cetak', [BarangController::class, 'cetak']);
     
     Route::get('/stoks', [BarangController::class, 'stok']);
 
@@ -66,8 +66,11 @@ Route::middleware('auth')->group(function() {
     Route::get('pengadaans/{id}', [PengadaanController::class, 'show']);
     Route::post('pengadaans/setujui/{id}', [PengadaanController::class, 'setujui']);
     Route::post('pengadaans/tolak/{id}', [PengadaanController::class, 'tolak']);  
-    Route::get('pengadaans/cetak/{id}', [PengadaanController::class, 'cetak']);  
     Route::get('histories/pengadaan', [PengadaanController::class, 'history']);
+
+    //Route Pdf//
+    Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);
+    Route::get('/barangs-cetak', [PdfController::class, 'cetakbarangs']); 
 });
 
 // route pegawai

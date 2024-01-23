@@ -110,16 +110,6 @@ class BarangController extends Controller
 
     public function stok() 
     {
-        return view('barang/stok', [
-
-        ]);
-    }
-
-    public function cetak()
-    {
-        return 'cetak barang';
-        return view('pdf/cetak-barang', [
-            'barangs' => Barang::all()
-        ]);
+        return view('barang/stok');
     }
 }

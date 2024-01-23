@@ -91,8 +91,14 @@ class PengembalianController extends Controller
 
     public function history()
     {
+        $dataPeminjaman = Peminjaman::where(function($query){
+            $query->where('status', 'dibatalkan')
+            ->orWhere('status', 'sudah kembali');
+        })
+        ->get();
+
         return view('pengembalian/history', [
-            'peminjaman' => Peminjaman::where('status', 'sudah kembali')->get()
+            'peminjaman' => $dataPeminjaman
         ]);
     }
 }

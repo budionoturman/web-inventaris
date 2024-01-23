@@ -102,6 +102,7 @@ class PegawaiPeminjamanController extends Controller
         else if (count($request->barang_id) == $request->total) {
             // return 'batal karena barang di ceklis semua';
             Peminjaman::where('id', $request->id)->update(['status' => 'dibatalkan']);
+            PeminjamanDetail::where('peminjam_id', $request->id)->update(['status' => 'dibatalkan']);
             for($i = 0; $i < count($request->barang_id); $i++)
             {
                 Barang::where('id', $request->barang_id[$i])->update(['status' => 'tersedia']);
@@ -125,13 +126,15 @@ class PegawaiPeminjamanController extends Controller
 
     public function history()
     {
+        $dataPeminjaman = Peminjaman::where(function($query){
+            $query->where('status', 'dibatalkan')
+            ->orWhere('status', 'sudah kembali');
+        })
+        ->where('user_id', auth()->user()->id)
+        ->get();
+
         return view('pegawai/peminjaman/history', [
-            'peminjaman' => Peminjaman::where(function($query){
-                                $query->where('status', 'dibatalkan')
-                                ->orWhere('status', 'sudah kembali');
-                            })
-                            ->where('user_id', auth()->user()->id)
-                            ->get()
+            'peminjaman' => $dataPeminjaman
         ]);
     }
 }

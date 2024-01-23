@@ -14,7 +14,7 @@
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
 
-                            @if ($totalDipinjam > 3)
+                            @if ($totalDipinjam < 3 && $totalDipinjam <= 0)
                                 <button type="button" class="btn btn-outline-secondary m-1">
                                     <a href="/pegawai/peminjams/create"> Tambah</a>
                                 </button>
