@@ -63,7 +63,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $peminjaman->tgl_pinjam->format('d-M-Y') }}</td>
+                                            <td>{{ $peminjaman->tgl_pinjam }}</td>
                                             <td>{{ $peminjaman->tgl_kembali }}</td>
                                             <td>
                                                 @if ($peminjaman->status === 'belum kembali')
@@ -76,10 +76,12 @@
 
                                             </td>
                                             <td>
-                                                <a href="/pegawai/peminjams/{{ $peminjaman->id }}/edit">
-                                                    <button type="button" class="btn btn-outline-warning m-1"><i
-                                                            class="fa-solid fa-pen-to-square"></i> edit</button>
-                                                </a>
+                                                @if ($peminjaman->status === 'proses')
+                                                    <a href="/pegawai/peminjams/{{ $peminjaman->id }}/edit">
+                                                        <button type="button" class="btn btn-outline-warning m-1"><i
+                                                                class="fa-solid fa-pen-to-square"></i> edit</button>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

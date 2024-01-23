@@ -11,10 +11,6 @@ class Peminjaman extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'tgl_pinjam' => 'datetime'
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -73,7 +73,7 @@
                                                     @if ($peminjaman->status === 'belum kembali')
                                                         <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                                     @elseif($peminjaman->status === 'proses')
-                                                        <a href="/proses/{{ $peminjaman->id }}">
+                                                        <a href="/peminjams/preview/{{ $peminjaman->id }}">
                                                             <button type="button"
                                                                 class="btn btn-success m-1">{{ $peminjaman->status }}</button>
                                                         </a>

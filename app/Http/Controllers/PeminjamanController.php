@@ -101,6 +101,17 @@ class PeminjamanController extends Controller
         //
     }
 
+    public function preview($id)
+    {
+        $dataPeminjaman = Peminjaman::findOrFail($id);
+        $dataStaff = auth()->user();
+
+        return view('peminjaman/preview', [
+            'peminjaman' => $dataPeminjaman,
+            'staff' => $dataStaff
+        ]);
+    }
+
     public function proses($id)
     {
         $peminjaman = Peminjaman::findOrFail($id);

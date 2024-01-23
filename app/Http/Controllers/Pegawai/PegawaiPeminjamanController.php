@@ -79,7 +79,7 @@ class PegawaiPeminjamanController extends Controller
     public function edit($id)
     {
         $dataPeminjaman = Peminjaman::with('barang', 'user')->find($id);
-        // return $dataPeminjaman;
+        
         return view('pegawai/peminjaman/edit', [
             'peminjaman' => $dataPeminjaman,
             'tgl_pinjam' => $dataPeminjaman->tgl_pinjam
