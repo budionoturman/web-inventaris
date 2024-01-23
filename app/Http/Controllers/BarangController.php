@@ -114,4 +114,12 @@ class BarangController extends Controller
 
         ]);
     }
+
+    public function cetak()
+    {
+        return 'cetak barang';
+        return view('pdf/cetak-barang', [
+            'barangs' => Barang::all()
+        ]);
+    }
 }

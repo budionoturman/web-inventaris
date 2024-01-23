@@ -43,7 +43,7 @@
                                             </td>
                                             <td>{{ $pengadaan->tgl_pengajuan }}</td>
                                             <td>{{ $pengadaan->status }}</td>
-                                            @can('isKepalaSekolah')
+                                            @canany(['isKepalaSekolah', 'isKepalaStaff'])
                                                 <td class="d-flex inline">
                                                     <a href="/pengadaans/{{ $pengadaan->id }}">
                                                         <button type="button" class="btn btn-outline-secondary m-1"><i
@@ -56,7 +56,7 @@
                                                         </a>
                                                     @endif
                                                 </td>
-                                            @endcan
+                                            @endcanany
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -14,9 +14,11 @@
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
 
-                            <button type="button" class="btn btn-outline-secondary m-1">
-                                <a href="/pegawai/peminjams/create"> Tambah</a>
-                            </button>
+                            @if ($totalDipinjam > 3)
+                                <button type="button" class="btn btn-outline-secondary m-1">
+                                    <a href="/pegawai/peminjams/create"> Tambah</a>
+                                </button>
+                            @endif
 
                         </div>
                         <div class="table-responsive">
@@ -44,11 +46,9 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
-                                        @can('isKepalaStaff')
-                                            <th class="border-bottom-0">
-                                                <h6 class="fw-semibold mb-0 text-center">Aksi</h6>
-                                            </th>
-                                        @endcan
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 text-center">Aksi</h6>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,7 +63,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $peminjaman->tgl_pinjam }}</td>
+                                            <td>{{ $peminjaman->tgl_pinjam->format('d-M-Y') }}</td>
                                             <td>{{ $peminjaman->tgl_kembali }}</td>
                                             <td>
                                                 @if ($peminjaman->status === 'belum kembali')
@@ -73,6 +73,13 @@
                                                 @else
                                                     <button class="btn btn-success m-1">{{ $peminjaman->status }}</button>
                                                 @endif
+
+                                            </td>
+                                            <td>
+                                                <a href="/pegawai/peminjams/{{ $peminjaman->id }}/edit">
+                                                    <button type="button" class="btn btn-outline-warning m-1"><i
+                                                            class="fa-solid fa-pen-to-square"></i> edit</button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

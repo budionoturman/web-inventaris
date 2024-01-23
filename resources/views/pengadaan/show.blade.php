@@ -63,6 +63,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama Barang</th>
+                                    <th>Kode Barang</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +71,7 @@
                                     <tr>
                                         <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                         <td>{{ $barang->barang_name ?? 'null' }}</td>
+                                        <td>{{ $barang->barang_code ?? 'null' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

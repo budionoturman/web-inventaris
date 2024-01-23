@@ -84,7 +84,6 @@ class PeminjamanController extends Controller
      */
     public function edit(Peminjaman $peminjaman)
     {
-        //
     }
 
     /**
@@ -92,7 +91,6 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, Peminjaman $peminjaman)
     {
-        //
     }
 
     /**
