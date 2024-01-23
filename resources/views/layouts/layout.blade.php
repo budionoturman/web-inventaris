@@ -382,6 +382,16 @@
             });
         </script>
 
+        @if (session()->has('success'))
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var message = "{{ session('success') }}"
+                    alert(message);
+                });
+            </script>
+        @endif
+
+
     </body>
 
 </html>
