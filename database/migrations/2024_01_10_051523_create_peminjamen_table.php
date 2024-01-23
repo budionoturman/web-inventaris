@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('tgl_pinjam');
-            $table->string('tgl_kembali')->nullable();
+            $table->date('tgl_pinjam');
+            $table->date('tgl_kembali')->nullable();
             $table->string('status');
             $table->integer('total');
             $table->integer('jumlah_kembali')->nullable();

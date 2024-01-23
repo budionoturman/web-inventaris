@@ -63,7 +63,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $peminjaman->tgl_pinjam }}</td>
+                                            <td>{{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>{{ $peminjaman->tgl_kembali }}</td>
                                             <td>
                                                 @if ($peminjaman->status === 'belum kembali')

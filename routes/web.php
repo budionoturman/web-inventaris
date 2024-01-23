@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function() {
     Route::get('pengadaans/{id}', [PengadaanController::class, 'show']);
     Route::post('pengadaans/setujui/{id}', [PengadaanController::class, 'setujui']);
     Route::post('pengadaans/tolak/{id}', [PengadaanController::class, 'tolak']);  
-    Route::get('histories/pengadaan', [PengadaanController::class, 'history']);
+    Route::get('/pengadaan/disetujui', [PengadaanController::class, 'pengadaanDisetujui']);
 
     //Route Pdf//
     Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);

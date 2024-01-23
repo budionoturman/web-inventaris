@@ -176,15 +176,15 @@
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span>
-                                        <span class="hide-menu">Pengadaan Barang</span>
+                                        <span class="hide-menu">Pengadaan Masuk</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/histories/pengadaan" aria-expanded="false">
+                                    <a class="sidebar-link" href="/pengadaan/disetujui" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-boxes-stacked"></i>
                                         </span>
-                                        <span class="hide-menu">History Pengadaan</span>
+                                        <span class="hide-menu">Pengadaan Disetujui</span>
                                     </a>
                                 </li>
                                 {{-- <li class="sidebar-item">

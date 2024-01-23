@@ -41,9 +41,6 @@
                                             <h6 class="fw-semibold mb-0">Tgl Pinjam</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Tgl Kembali</h6>
-                                        </th>
-                                        <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
                                         @canany(['isStaffGudang'])
@@ -65,8 +62,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $peminjaman->tgl_pinjam }}</td>
-                                            <td>{{ $peminjaman->tgl_kembali }}</td>
+                                            <td>{{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>{{ $peminjaman->status }}</td>
                                             @can('isStaffGudang')
                                                 <td>

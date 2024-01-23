@@ -53,7 +53,7 @@
                                             <td>{{ $barang->barang_code }}</td>
                                             <td>{{ $barang->status }}</td>
                                             <td>{{ $barang->kondisi }}</td>
-                                            <td>{{ $barang->tgl_masuk }}</td>
+                                            <td>{{ Carbon\Carbon::parse($barang->tgl_masuk)->format('d-M-Y') }}</td>
                                             <td>{{ $barang->kategori->kategori_name }}</td>
                                             @can('isStaffGudang')
                                                 <td class="d-flex inline">

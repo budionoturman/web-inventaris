@@ -61,7 +61,7 @@
                                             ?>
                                             </td>
                                             <td>{{ $peminjaman->total }}</td>
-                                            <td>{{ $peminjaman->created_at->format('d-M-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>
                                                 <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                             </td>

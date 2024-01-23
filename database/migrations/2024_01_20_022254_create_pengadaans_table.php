@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('no_surat')->unique();
-            $table->string('tgl_pengajuan');
+            $table->date('tgl_pengajuan');
             $table->string('status');
             $table->timestamps();
         });

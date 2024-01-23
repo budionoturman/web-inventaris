@@ -67,8 +67,8 @@
                                             }
                                             ?></td>
                                             <td>{{ $pjm->total }}</td>
-                                            <td>{{ $pjm->tgl_pinjam }}</td>
-                                            <td>{{ $pjm->tgl_kembali }}</td>
+                                            <td>{{ Carbon\Carbon::parse($pjm->tgl_pinjam)->format('d-M-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($pjm->tgl_kembali)->format('d-M-Y') }}</td>
                                             <td>{{ $pjm->denda }}</td>
                                             <td>
                                                 <button class="btn btn-danger m-1">{{ $pjm->status }}</button>

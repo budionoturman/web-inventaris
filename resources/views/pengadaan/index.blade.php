@@ -82,7 +82,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $pengadaan->tgl_pengajuan }}</td>
+                                            <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
                                             @can('isKepalaSekolah')
                                                 <td class="d-flex inline">

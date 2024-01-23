@@ -102,14 +102,14 @@ class PengadaanController extends Controller
         return redirect('/pengadaans')->with('success', 'Pengadaan Berhasil Ditolak');
     }
 
-    public function history()
+    public function pengadaanDisetujui()
     {
         $dataPengadaan = Pengadaan::where(function($query){
             $query->where('status', 'like', 'ditolak')
             ->orWhere('status', 'like', 'disetujui');
         })->get();
 
-        return view('pengadaan/history', [
+        return view('pengadaan/disetujui', [
             'pengadaans' => $dataPengadaan
         ]);
     }
