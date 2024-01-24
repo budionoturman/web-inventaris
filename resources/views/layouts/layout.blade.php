@@ -187,6 +187,14 @@
                                         <span class="hide-menu">Pengadaan Disetujui</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/pengadaan/dibeli" aria-expanded="false">
+                                        <span>
+                                            <i class="fa-solid fa-boxes-stacked"></i>
+                                        </span>
+                                        <span class="hide-menu">Pengadaan Dibeli</span>
+                                    </a>
+                                </li>
                                 {{-- <li class="sidebar-item">
                             <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                                 <span>

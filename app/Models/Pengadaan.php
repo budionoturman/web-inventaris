@@ -26,4 +26,9 @@ class Pengadaan extends Model
     {
         return $this->belongsToMany(Barang::class,'pengadaan_details');
     }
+
+    public function kwitansi()
+    {
+        return $this->hasOne(Kwitansi::class);
+    }
 }

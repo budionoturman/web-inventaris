@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BarangTidakDipakai;
+use App\Models\Jurusan;
+use App\Models\Kategori;
+use App\Models\Kwitansi;
 use App\Models\Pengadaan;
 use App\Models\PengadaanDetail;
 use Illuminate\Http\Request;
@@ -110,6 +114,68 @@ class PengadaanController extends Controller
         })->get();
 
         return view('pengadaan/disetujui', [
+            'pengadaans' => $dataPengadaan
+        ]);
+    }
+
+    public function createKwitansi($id)
+    {
+        $dataPengadaan = Pengadaan::with('barang')->findOrFail($id);
+        
+        return view('pengadaan/upload-kwitansi', [
+            'pengadaan' => $dataPengadaan
+        ]);
+        return $id;
+    }
+
+    public function storeKwitansi(Request $request)
+    {
+        // return $request;
+        $validatedData = $request->validate([
+            'kwitansi' => 'required|file',
+            'tgl_beli' => 'required'
+        ]);
+        $validatedData['pengadaan_id']= $request->pengadaan_id;
+
+        $file = $request->file('kwitansi');
+        
+        $validatedData['file_name'] = $file->getClientOriginalName();
+        $validatedData['file_type'] = $file->getMimeType();
+        $validatedData['size'] = $file->getSize();
+        $validatedData['path'] = $file->store('toPath', ['disk' => 'public_uploads_kwitansi']);
+
+
+        //update table barang
+        for($i = 0; $i < count($request->barang_id); $i++) {
+            Barang::where('id', $request->barang_id[$i])->update([
+                'status' => 'tersedia',
+                'kondisi' => 'baik'
+            ]);
+            
+            BarangTidakDipakai::create([
+                'barang_name' => $request->barang_name[$i],
+                'kategori_id' => $request->kategori_id[$i],
+                'tgl_masuk' => now()
+            ]);
+        }
+
+        //store ke table kwitansi
+        Kwitansi::create($validatedData);
+
+        //update table pengadaan
+        Pengadaan::where('id', $request->pengadaan_id)->update([
+            'status' => 'sudah dibeli'
+        ]);
+
+        return redirect('/pengadaan/disetujui')->with('success', 'Berhasil upload kwitansi');
+
+    }
+
+    public function pengadaanDibeli()
+    {
+        $dataPengadaan = Pengadaan::with('kwitansi')->where('status', 'sudah dibeli')->get();
+        
+        return view('pengadaan/sudah-dibeli', [
             'pengadaans' => $dataPengadaan
         ]);
     }
