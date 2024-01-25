@@ -167,7 +167,7 @@ class PengadaanController extends Controller
             'status' => 'sudah dibeli'
         ]);
 
-        return redirect('/pengadaan/disetujui')->with('success', 'Berhasil upload kwitansi');
+        return redirect('/pengadaan/dibeli')->with('success', 'Berhasil upload kwitansi');
 
     }
 
