@@ -30,6 +30,11 @@ return [
 
     'disks' => [
 
+        'public_uploads_kwitansi' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/kwitansi',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

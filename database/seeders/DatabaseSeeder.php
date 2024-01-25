@@ -127,8 +127,8 @@ class DatabaseSeeder extends Seeder
         Barang::create([
             'barang_code' => 'TKJ/LTP/02',
             'barang_name' => 'MSI Modern 14 B5M',
-            'status' => 'rusak',
-            'kondisi' => 'tidak dapat diperbaiki',
+            'status' => 'tersedia',
+            'kondisi' => 'baik',
             'tgl_masuk' => Carbon::now()->format('Y-m-d'),
             'kategori_id' => '1',
         ]);
@@ -136,8 +136,8 @@ class DatabaseSeeder extends Seeder
         Barang::create([
             'barang_code' => 'TKJ/LTP/03',
             'barang_name' => 'MSI Modern 14 B5M',
-            'status' => 'rusak',
-            'kondisi' => 'tidak dapat diperbaiki',
+            'status' => 'tersedia',
+            'kondisi' => 'baik',
             'tgl_masuk' => Carbon::now()->format('Y-m-d'),
             'kategori_id' => '1',
         ]);
@@ -145,8 +145,8 @@ class DatabaseSeeder extends Seeder
         Barang::create([
             'barang_code' => 'TKJ/LTP/04',
             'barang_name' => 'MSI Modern 14 B5M',
-            'status' => 'rusak',
-            'kondisi' => 'tidak dapat diperbaiki',
+            'status' => 'tersedia',
+            'kondisi' => 'baik',
             'tgl_masuk' => Carbon::now()->format('Y-m-d'),
             'kategori_id' => '1',
         ]);

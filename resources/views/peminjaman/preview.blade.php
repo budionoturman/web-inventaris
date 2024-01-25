@@ -34,8 +34,16 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col">
-                <a href="/pengadaans">
+                <a href="/peminjams">
                     <button type="button" class="btn btn-outline-warning m-1">Kembali
+                    </button>
+                </a>
+                <a href="/peminjams-cetak/{{ $peminjaman->id }}" target="_blank">
+                    <button type="button" class="btn btn-outline-secondary m-1">Cetak
+                    </button>
+                </a>
+                <a href="/peminjams/proses/{{ $peminjaman->id }}">
+                    <button type="button" class="btn btn-outline-success m-1">Proses
                     </button>
                 </a>
             </div>
@@ -45,19 +53,16 @@
                 <div class="row">
                     <section class="sheet padding-10mm">
                         {{-- <h3>Surat Keretangan </h3> --}}
-                        <p>No : {{ $pengadaan->no_surat }}</p>
-                        <p>Perihal : Surat pengadaan</p>
-                        <p>Tanggal : {{ $pengadaan->tgl_pengajuan }}</p>
-                        <br>
-                        <br>
+                        <p>Perihal : Surat Peminjaman</p>
+                        <p>Tanggal : {{ $peminjaman->tgl_pinjam }}</p>
                         <br>
                         <p>Dengan hormat,<br>
-                            Yang bertanda tangan dibawah ini, Kepala SMK Avicena Rajeg: <br>
-                            Nama :Muhammad Subur, S.Pd.,MM <br>
-                            NIP : <br>
-                            Jabatan : Kepala SMK Avicena Rajeg</p>
+                            Yang bertanda tangan dibawah ini : <br>
+                            Nama :{{ $staff->name }} <br>
+                            NIP : {{ $staff->nip }}<br>
+                            Jabatan : {{ $staff->role->role_name }}</p>
 
-                        <p>Bermaksud untuk mengajukan permohonan pengadaan barang dengan rincian sebagai berikut:</p>
+                        <p>Bermaksud untuk meminjamkan barang dengan rincian sebagai berikut:</p>
                         <table class="table" border="0">
                             <thead>
                                 <tr>
@@ -67,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pengadaan->barang as $barang)
+                                @foreach ($peminjaman->barang as $barang)
                                     <tr>
                                         <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                         <td>{{ $barang->barang_name ?? 'null' }}</td>
@@ -76,6 +81,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <p>
+                            Kepada : {{ $peminjaman->user->name }} <br>
+                            NIP : {{ $peminjaman->user->nip }} <br>
+                            Jabatan : {{ $peminjaman->user->role->role_name }}
+                        </p>
                         <p>Demikian kami sampaikan, atas perhatian dan kerjasamanya diucapkan terima kasih.</p>
                         <br>
                         <br>

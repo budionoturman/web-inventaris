@@ -5,12 +5,12 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>{{ session('success') }}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Pengadaan Barang</h5>
                         </div>
@@ -24,9 +24,12 @@
                                         <th>Barang</th>
                                         <th>Tanggal Pengajuan</th>
                                         <th>Status</th>
-                                        @can('isKepalaSekolah')
+                                        @canany(['isKepalaSekolah', 'isKepalaStaff'])
                                             <th>Aksi</th>
-                                        @endcan
+                                        @endcanany
+                                        @canany(['isKepalaStaff'])
+                                            <th>Sudah Dibeli?</th>
+                                        @endcanany
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,9 +44,9 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $pengadaan->tgl_pengajuan }}</td>
+                                            <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
-                                            @can('isKepalaSekolah')
+                                            @canany(['isKepalaSekolah', 'isKepalaStaff'])
                                                 <td class="d-flex inline">
                                                     <a href="/pengadaans/{{ $pengadaan->id }}">
                                                         <button type="button" class="btn btn-outline-secondary m-1"><i
@@ -56,7 +59,15 @@
                                                         </a>
                                                     @endif
                                                 </td>
-                                            @endcan
+                                            @endcanany
+                                            @canany(['isKepalaStaff'])
+                                                <td>
+                                                    <a href="/pengadaan/upload-kwitansi/{{ $pengadaan->id }}">
+                                                        <button type="button" class="btn btn-outline-secondary m-1"><i
+                                                                class="fa-solid fa-edit"></i> Ya</button>
+                                                    </a>
+                                                </td>
+                                            @endcanany
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KondisiBarangController;
+use App\Http\Controllers\Pdf\PdfController;
 use App\Http\Controllers\Pegawai\PegawaiPeminjamanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengadaanController;
@@ -45,7 +46,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/stoks', [BarangController::class, 'stok']);
 
     Route::resource('/peminjams', PeminjamanController::class);
-    Route::any('/proses/{id}',[PeminjamanController::class, 'proses']);
+    Route::get('/peminjams/preview/{id}', [PeminjamanController::class, 'preview']);
+    Route::any('/peminjams/proses/{id}',[PeminjamanController::class, 'proses']);
     Route::any('/batalkan/{id}',[PeminjamanController::class, 'batalkan']);
 
     Route::get('pengembalians', [PengembalianController::class, 'index']);
@@ -65,16 +67,21 @@ Route::middleware('auth')->group(function() {
     Route::get('pengadaans/{id}', [PengadaanController::class, 'show']);
     Route::post('pengadaans/setujui/{id}', [PengadaanController::class, 'setujui']);
     Route::post('pengadaans/tolak/{id}', [PengadaanController::class, 'tolak']);  
-    Route::get('pengadaans/cetak/{id}', [PengadaanController::class, 'cetak']);  
-    Route::get('histories/pengadaan', [PengadaanController::class, 'history']);
+    Route::get('/pengadaan/disetujui', [PengadaanController::class, 'pengadaanDisetujui']);
+    Route::get('pengadaan/upload-kwitansi/{id}', [PengadaanController::class, 'createKwitansi']);
+    Route::post('pengadaan/upload-kwitansi', [PengadaanController::class, 'storeKwitansi']);
+    Route::get('/pengadaan/dibeli/', [PengadaanController::class, 'pengadaanDibeli']);
+
+    //Route Pdf//
+    Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);
+    Route::get('/barangs-cetak', [PdfController::class, 'cetakBarangs']);
+    Route::get('/peminjams-cetak/{id}', [PdfController::class, 'cetakPeminjaman']);
 });
 
 // route pegawai
 
 Route::middleware('auth')->group(function() {
-    Route::get('pegawai/peminjams', [PegawaiPeminjamanController::class, 'index']);
-    Route::get('pegawai/peminjams/create', [PegawaiPeminjamanController::class, 'create']);
-    Route::post('pegawai/peminjams', [PegawaiPeminjamanController::class, 'store']);
+    Route::resource('pegawai/peminjams', PegawaiPeminjamanController::class);
     Route::get('pegawai/history', [PegawaiPeminjamanController::class, 'history']);
 });
 

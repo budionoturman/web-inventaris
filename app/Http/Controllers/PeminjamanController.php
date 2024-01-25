@@ -84,7 +84,6 @@ class PeminjamanController extends Controller
      */
     public function edit(Peminjaman $peminjaman)
     {
-        //
     }
 
     /**
@@ -92,7 +91,6 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, Peminjaman $peminjaman)
     {
-        //
     }
 
     /**
@@ -101,6 +99,17 @@ class PeminjamanController extends Controller
     public function destroy(Peminjaman $peminjaman)
     {
         //
+    }
+
+    public function preview($id)
+    {
+        $dataPeminjaman = Peminjaman::findOrFail($id);
+        $dataStaff = auth()->user();
+
+        return view('peminjaman/preview', [
+            'peminjaman' => $dataPeminjaman,
+            'staff' => $dataStaff
+        ]);
     }
 
     public function proses($id)
@@ -121,8 +130,8 @@ class PeminjamanController extends Controller
             Barang::where('id', $peminjaman->peminjaman_detail[$i]->barang_id)
                     ->update(['status' => 'tersedia']);
         }
-        Peminjaman::destroy($id);
-        PeminjamanDetail::destroy('peminjam_id', $id);
+        Peminjaman::where('id', $id)->update(['status' => 'dibatalkan']);
+        PeminjamanDetail::where('peminjam_id', $id)->update(['status' => 'dibatalkan']);
 
         return redirect('/peminjams')->with('success', 'Peminjaman Berhasil Dibatalkan');
     }

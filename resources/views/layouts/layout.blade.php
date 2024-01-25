@@ -176,15 +176,23 @@
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span>
-                                        <span class="hide-menu">Pengadaan Barang</span>
+                                        <span class="hide-menu">Pengadaan Masuk</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="/histories/pengadaan" aria-expanded="false">
+                                    <a class="sidebar-link" href="/pengadaan/disetujui" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-boxes-stacked"></i>
                                         </span>
-                                        <span class="hide-menu">History Pengadaan</span>
+                                        <span class="hide-menu">Pengadaan Disetujui</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/pengadaan/dibeli" aria-expanded="false">
+                                        <span>
+                                            <i class="fa-solid fa-boxes-stacked"></i>
+                                        </span>
+                                        <span class="hide-menu">Pengadaan Dibeli</span>
                                     </a>
                                 </li>
                                 {{-- <li class="sidebar-item">
@@ -380,7 +388,37 @@
                     }
                 });
             });
+
+            $(function() {
+                var dtToday = new Date();
+
+                var month = dtToday.getMonth() + 1;
+                var day = dtToday.getDate();
+                var year = dtToday.getFullYear();
+                if (month < 10)
+                    month = '0' + month.toString();
+                if (day < 10)
+                    day = '0' + day.toString();
+
+                var minDate = year + '-' + month + '-' + day;
+
+                $('#tgl_pinjam').attr('min', minDate);
+            });
+
+            function resetForm() {
+                document.getElementById("myForm").reset();
+            }
         </script>
+
+        @if (session()->has('success'))
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var message = "{{ session('success') }}"
+                    alert(message);
+                });
+            </script>
+        @endif
+
 
     </body>
 

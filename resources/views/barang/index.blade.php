@@ -6,22 +6,29 @@
                 <div class="card w-100">
                     <div class="card-body p-4">
 
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ session('success') }}</strong>
+                                <strong></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        <div class="d-flex inline justify-content-between">
-                            <h5 class="card-title fw-semibold mb-4">Tabel Data Barang</h5>
-
-                            @can('isStaffGudang')
+                        <div class=" row justify-content-between">
+                            <div class="col">
+                                <h5 class="card-title fw-semibold mb-4">Tabel Data Barang</h5>
+                            </div>
+                            <div class="col text-end">
+                                @can('isStaffGudang')
+                                    <button type="button" class="btn btn-outline-secondary m-1">
+                                        <a href="/barangs/create">Tambah</a>
+                                    </button>
+                                @endcan
                                 <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/barangs/create">Tambah</a>
+                                    <a href="/barangs-cetak" target="_blank">Cetak</a>
                                 </button>
-                            @endcan
+                            </div>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
                                 <thead>
@@ -46,7 +53,7 @@
                                             <td>{{ $barang->barang_code }}</td>
                                             <td>{{ $barang->status }}</td>
                                             <td>{{ $barang->kondisi }}</td>
-                                            <td>{{ $barang->tgl_masuk }}</td>
+                                            <td>{{ Carbon\Carbon::parse($barang->tgl_masuk)->format('d-M-Y') }}</td>
                                             <td>{{ $barang->kategori->kategori_name }}</td>
                                             @can('isStaffGudang')
                                                 <td class="d-flex inline">

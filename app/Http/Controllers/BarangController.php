@@ -110,8 +110,6 @@ class BarangController extends Controller
 
     public function stok() 
     {
-        return view('barang/stok', [
-
-        ]);
+        return view('barang/stok');
     }
 }

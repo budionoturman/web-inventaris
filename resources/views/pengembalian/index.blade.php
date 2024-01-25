@@ -2,12 +2,12 @@
 @section('container')
     <div class="container-fluid">
         <div class="row">
-            @if (session()->has('success'))
+            {{-- @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>{{ session('success') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+            @endif --}}
             <div class="col-lg-12 d-flex align-items-stretch">
                 <div class="card w-100">
                     <div class="card-body p-4">
@@ -61,7 +61,7 @@
                                             ?>
                                             </td>
                                             <td>{{ $peminjaman->total }}</td>
-                                            <td>{{ $peminjaman->created_at->format('d-M-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>
                                                 <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                             </td>

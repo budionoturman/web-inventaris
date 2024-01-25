@@ -6,12 +6,12 @@
                 <div class="card w-100">
                     <div class="card-body p-4">
 
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>{{ session('success') }}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
@@ -41,9 +41,6 @@
                                             <h6 class="fw-semibold mb-0">Tgl Pinjam</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Tgl Kembali</h6>
-                                        </th>
-                                        <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
                                         @canany(['isStaffGudang'])
@@ -65,15 +62,14 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $peminjaman->tgl_pinjam }}</td>
-                                            <td>{{ $peminjaman->tgl_kembali }}</td>
+                                            <td>{{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>{{ $peminjaman->status }}</td>
                                             @can('isStaffGudang')
                                                 <td>
                                                     @if ($peminjaman->status === 'belum kembali')
                                                         <button class="btn btn-danger m-1">{{ $peminjaman->status }}</button>
                                                     @elseif($peminjaman->status === 'proses')
-                                                        <a href="/proses/{{ $peminjaman->id }}">
+                                                        <a href="/peminjams/preview/{{ $peminjaman->id }}">
                                                             <button type="button"
                                                                 class="btn btn-success m-1">{{ $peminjaman->status }}</button>
                                                         </a>

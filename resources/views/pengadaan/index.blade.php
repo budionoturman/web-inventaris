@@ -6,12 +6,12 @@
                 <div class="card w-100">
                     <div class="card-body p-4">
 
-                        @if (session()->has('success'))
+                        {{-- @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>{{ session('success') }}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Saran Pengadaan Barang</h5>
@@ -82,7 +82,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td>{{ $pengadaan->tgl_pengajuan }}</td>
+                                            <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
                                             @can('isKepalaSekolah')
                                                 <td class="d-flex inline">
