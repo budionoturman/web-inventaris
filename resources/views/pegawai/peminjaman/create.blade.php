@@ -2,12 +2,12 @@
 @section('container')
     <div class="container-fluid">
         <div class="container-fluid">
-            @if (session()->has('success'))
+            {{-- @if (session()->has('success'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>{{ session('success') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+            @endif --}}
             <form action="/pegawai/peminjams" method="post">
                 @csrf
                 <div class="card">
@@ -67,7 +67,7 @@
 
                         <div class="mb-3">
                             <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
-                            <input type="date" class="form-control" name="tgl_pinjam" required>
+                            <input type="date" class="form-control" name="tgl_pinjam" id="tgl_pinjam" required>
                         </div>
 
                         <div class="mb-3">

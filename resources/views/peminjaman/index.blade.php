@@ -73,9 +73,9 @@
                                                             <button type="button"
                                                                 class="btn btn-success m-1">{{ $peminjaman->status }}</button>
                                                         </a>
-                                                        <a href="/batalkan/{{ $peminjaman->id }}">
+                                                        {{-- <a href="/batalkan/{{ $peminjaman->id }}">
                                                             <button type="button" class="btn btn-danger m-1">Batalkkan</button>
-                                                        </a>
+                                                        </a> --}}
                                                     @else
                                                         <button class="btn btn-success m-1">{{ $peminjaman->status }}</button>
                                                     @endif

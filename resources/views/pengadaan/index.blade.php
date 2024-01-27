@@ -60,7 +60,6 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Requester</th>
                                         <th>No Pengadaan</th>
                                         <th>Barang</th>
                                         <th>Tanggal Pengajuan</th>
@@ -74,7 +73,6 @@
                                     @foreach ($pengadaans as $pengadaan)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pengadaan->user->name }}</td>
                                             <td>{{ $pengadaan->no_surat }}</td>
                                             <td><?php
                                             foreach ($pengadaan->barang as $brg) {
