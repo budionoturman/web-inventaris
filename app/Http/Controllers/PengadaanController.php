@@ -101,7 +101,7 @@ class PengadaanController extends Controller
     public function pengadaanDisetujui()
     {
         $dataPengadaan = Pengadaan::where(function($query){
-            $query->where('status', 'like', 'ditolak')
+            $query->where('status', 'like','')
             ->orWhere('status', 'like', 'disetujui');
         })->get();
 
@@ -117,7 +117,6 @@ class PengadaanController extends Controller
         return view('pengadaan/upload-kwitansi', [
             'pengadaan' => $dataPengadaan
         ]);
-        return $id;
     }
 
     public function storeKwitansi(Request $request)
@@ -147,7 +146,7 @@ class PengadaanController extends Controller
                 $kodeKategori = $dataKategori[$i]->kategori_code;
 
                 $noUrutAkhir = Barang::max('id');
-                $no = "0".$noUrutAkhir + 1;
+                $no = "".$noUrutAkhir + 1;
 
                 // $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no++;
 

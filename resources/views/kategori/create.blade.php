@@ -11,11 +11,18 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="kategori_name" class="form-label">Nama </label>
-                                <input type="text" class="form-control" name="kategori_name" id="kategori_name" required>
+                                <input type="text" class="form-control" name="kategori_name" id="kategori_name" required
+                                    value="{{ old('kategori_name') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="kategori_code" class="form-label">Kode Kategori </label>
-                                <input type="text" class="form-control" name="kategori_code" id="kategori_code" required>
+                                <input type="text" class="form-control @error('kategori_code') is-invalid @enderror"
+                                    name="kategori_code" id="kategori_code" required>
+                                @error('kategori_code')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
