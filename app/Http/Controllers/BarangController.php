@@ -43,7 +43,7 @@ class BarangController extends Controller
         $kodekategori = $getkategoriData->kategori_code;
 
         $noUrutAkhir = Barang::max('id');
-        $no = "0".$noUrutAkhir + 1;
+        $no = "".$noUrutAkhir + 1;
 
         $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no;
         //create code barang end

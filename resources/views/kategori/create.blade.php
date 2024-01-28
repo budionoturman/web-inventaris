@@ -11,7 +11,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="kategori_name" class="form-label">Nama </label>
-                                <input type="text" class="form-control" name="kategori_name" id="kategori_name" required>
+                                <input type="text" class="form-control" name="kategori_name" id="kategori_name" required
+                                    value="{{ old('kategori_name') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="kategori_code" class="form-label">Kode Kategori </label>
