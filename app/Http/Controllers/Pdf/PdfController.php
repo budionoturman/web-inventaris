@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pdf;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\Jurusan;
 use App\Models\Peminjaman;
 use App\Models\Pengadaan;
 use Illuminate\Http\Request;
@@ -40,5 +41,15 @@ class PdfController extends Controller
             'staff' => $dataStaff
         ]);
         return $pdf->stream('peminjaman.pdf');
+    }
+
+    public function cetakHistory($id)
+    {
+        $dataPengembalian = Peminjaman::with('barang')->findOrFail($id);
+        
+        $pdf = PDF::loadView('pdf/cetak-history', [
+            'pengembalian' => $dataPengembalian
+        ]);
+        return $pdf->stream('history.pdf');
     }
 }

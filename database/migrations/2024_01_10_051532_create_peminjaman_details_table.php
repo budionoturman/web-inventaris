@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('peminjam_id');
             $table->foreignId('barang_id');
             $table->string('status')->nullable();
+            $table->string('kondisi')->nullable();
             $table->timestamps();
         });
     }

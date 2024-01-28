@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function() {
     Route::any('kembalikan/{id}',[PengembalianController::class, 'kembalikan']);
     Route::any('storekembali', [PengembalianController::class, 'storekembali']);
     Route::get('history', [PengembalianController::class, 'history']);
+    Route::get('history/preview/{id}', [PengembalianController::class, 'createDenda']);
 
     Route::get('kondisi-barangs', [KondisiBarangController::class, 'index']);
     Route::get('kondisi-barangs/{id}/perbaikan', [KondisiBarangController::class, 'perbaikan']);
@@ -76,6 +77,7 @@ Route::middleware('auth')->group(function() {
     Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);
     Route::get('/barangs-cetak', [PdfController::class, 'cetakBarangs']);
     Route::get('/peminjams-cetak/{id}', [PdfController::class, 'cetakPeminjaman']);
+    Route::get('history-cetak/{id}', [PdfController::class, 'cetakHistory']);
 });
 
 // route pegawai

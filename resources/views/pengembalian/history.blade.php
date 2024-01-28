@@ -36,10 +36,6 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Barang</h6>
                                         </th>
-
-                                        <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Jumlah Total</h6>
-                                        </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Tgl Pinjam</h6>
                                         </th>
@@ -48,9 +44,6 @@
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Denda</h6>
-                                        </th>
-                                        <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Status</h6>
                                         </th>
 
                                     </tr>
@@ -61,17 +54,19 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pjm->user->name }}</td>
                                             <td>{{ $pjm->user->no_hp }}</td>
-                                            <td><?php
-                                            foreach ($pjm->barang as $brg) {
-                                                echo $brg->barang_name . '<br>';
-                                            }
-                                            ?></td>
-                                            <td>{{ $pjm->total }}</td>
+                                            <td>
+                                                <?php
+                                                foreach ($pjm->barang as $brg) {
+                                                    echo $brg->barang_name . ' (' . $brg->pivot->kondisi . ')' . '<br>';
+                                                }
+                                                ?>
+                                            </td>
                                             <td>{{ Carbon\Carbon::parse($pjm->tgl_pinjam)->format('d-M-Y') }}</td>
                                             <td>{{ Carbon\Carbon::parse($pjm->tgl_kembali)->format('d-M-Y') }}</td>
-                                            <td>{{ $pjm->denda }}</td>
                                             <td>
-                                                <button class="btn btn-danger m-1">{{ $pjm->status }}</button>
+                                                <a href="/history/preview/{{ $pjm->id }}">
+                                                    <button type="button" class="btn btn-success m-1">Lihat</button>
+                                                </a>
                                             </td>
 
                                         </tr>

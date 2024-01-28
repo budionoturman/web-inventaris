@@ -49,10 +49,13 @@ class PengembalianController extends Controller
                 Barang::where('id', $request->barang_id[$i])->update([
                     'kondisi' =>  $request->kondisi[$i] 
                 ]);
+                PeminjamanDetail::where('peminjam_id', $request->peminjam_id)
+                                ->where('barang_id', $request->barang_id[$i])
+                                ->update([
+                                    'status' => 'sudah kembali',
+                                    'kondisi' => $request->kondisi[$i]
+                                ]);
             }
-            PeminjamanDetail::where('peminjam_id', $request->peminjam_id)->update([
-                'status' => 'sudah kembali'
-            ]);
     
             $peminjam = Peminjaman::findOrFail($request->peminjam_id);
     
@@ -64,7 +67,7 @@ class PengembalianController extends Controller
              
             return redirect('/pengembalians')->with('success', 'Berhasil Mengembalikan Barang');
         } else {
-            // return "kembali sebagian";
+            return "kembali sebagian";
             for($i = 0; $i < count($request->barang_id); $i++)
             {
                 Barang::where('id', $request->barang_id[$i])->update(['status' => 'tersedia']);
@@ -74,7 +77,10 @@ class PengembalianController extends Controller
                 ]);
                 PeminjamanDetail::where('peminjam_id', $request->peminjam_id)
                                     ->where('barang_id', $request->barang_id[$i])
-                                    ->update(['status' => 'sudah kembali']);
+                                    ->update([
+                                        'status' => 'sudah kembali',
+                                        'kondisi' => $request->kondisi[$i]
+                                    ]);
             }
     
             $peminjam = Peminjaman::findOrFail($request->peminjam_id);
@@ -91,7 +97,7 @@ class PengembalianController extends Controller
 
     public function history()
     {
-        $dataPeminjaman = Peminjaman::where(function($query){
+        $dataPeminjaman = Peminjaman::with('barang')->where(function($query){
             $query->where('status', 'dibatalkan')
             ->orWhere('status', 'sudah kembali');
         })
@@ -99,6 +105,15 @@ class PengembalianController extends Controller
 
         return view('pengembalian/history', [
             'peminjaman' => $dataPeminjaman
+        ]);
+    }
+
+    public function createDenda($id)
+    {
+        $dataPengembalian = Peminjaman::with('barang')->findOrFail($id);
+        
+        return view('pengembalian/preview', [
+            'pengembalian' => $dataPengembalian
         ]);
     }
 }
