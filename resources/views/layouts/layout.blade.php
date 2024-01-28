@@ -270,11 +270,13 @@
         <script src="{{ asset('admin-ui') }}/src/datatables/jquery.dataTables.js"></script>
         <script src="{{ asset('admin-ui') }}/src/datatables/dataTables.bootstrap4.min.js"></script>
         <script src="{{ asset('admin-ui') }}/src/datatables/datatables-demo.js"></script>
-        <!-- Select2 -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+        // Select2
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
-        <script>
+        <script type="text/javascript">
             $(function() {
                 $('.select2').select2()
             });
@@ -405,9 +407,34 @@
                 $('#tgl_pinjam').attr('min', minDate);
             });
 
+            var path = "{{ url('peminjam/create/') }}";
+
+            $('#search').typeahead({
+
+                source: function(query, process) {
+
+                    return $.get(path, {
+                        query: query
+                    }, function(data) {
+
+                        return process(data);
+                    });
+                }
+            });
+
             function resetForm() {
                 document.getElementById("myForm").reset();
             }
+
+            $('.cb').click(function() {
+                $('.ul').html("");
+                $(".cb").each(function() {
+                    if ($(this).is(":checked")) {
+                        var barangName = $(this).attr('placeholder');
+                        $('.ul').append('<li>' + barangName + '</li>')
+                    }
+                });
+            });
         </script>
 
         @if (session()->has('success'))
@@ -419,6 +446,57 @@
             </script>
         @endif
 
+        <script>
+            function myFunction() {
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("label")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (filter && txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        const checkboxCollection = document.querySelectorAll('input[type="checkbox"]')
+                        const checkboxArray = [...checkboxCollection];
+                        checkboxArray.forEach(input => input.addEventListener('change', drawList))
+
+                        drawList();
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+            myFunction()
+
+            function drawList() {
+                const list = document.getElementById('myUL');
+                const itemArray = [...list.children];
+
+                const sortedArray = itemArray.sort((a, b) => {
+                    // First sort by checbox
+                    let aChecked = a.querySelector('input').checked;
+                    let bChecked = b.querySelector('input').checked;
+                    if (aChecked && !bChecked) return -1;
+                    if (!aChecked && bChecked) return 1;
+
+                    // If both are checked/not checked compare by textContent
+                    let aText = a.querySelector('label').textContent;
+                    let bText = b.querySelector('label').textContent;
+                    return aText > bText ? 1 : -1;
+                })
+
+                list.innerHTML = '';
+                list.append(...sortedArray);
+            }
+
+            const checkboxCollection = document.querySelectorAll('input[type="checkbox"]')
+            const checkboxArray = [...checkboxCollection];
+            checkboxArray.forEach(input => input.addEventListener('change', drawList))
+
+            drawList();
+        </script>
 
     </body>
 

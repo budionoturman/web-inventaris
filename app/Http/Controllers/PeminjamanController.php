@@ -43,7 +43,20 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->barang_id === null){
+        // hitung total barang yang sudah dipinjam peruser
+        $dataBarangDipinjam = Peminjaman::with('peminjaman_detail')->where('user_id', $request->user_id)
+                                ->where(function($query){
+                                    $query->where('status', '!=', 'sudah kembali')
+                                    ->where('status', '!=', 'dibatalkan');
+                                })->get();
+        $totalDipinjam = 0;
+        for($i = 0; $i < count($dataBarangDipinjam); $i++) {
+            $totalDipinjam += $dataBarangDipinjam[$i]->total;
+        }
+
+        if($totalDipinjam + count($request->barang_id) > 3){
+            return back()->with("success", "Barang Pinjam dan belum dikembalikan tidak boleh lebih dari 3 setiap user");
+        } elseif ($request->barang_id === null){
             return back()->with("success", "Pilih Barang Terlebih Dahulu");
         } elseif (count($request->barang_id) > 3) {
             return back()->with("success", "Barang Tidak Boleh Lebih Dari 3");

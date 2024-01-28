@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
             $table->string('barang_code', '15')->unique();
-            $table->string('barang_name', '12');
-            $table->string('status', '12');
-            $table->string('kondisi', '21');
+            $table->string('barang_name', '64');
+            $table->string('status', '32');
+            $table->string('kondisi', '32');
             $table->date('tgl_masuk');
             $table->foreignId('kategori_id');
             $table->timestamps();

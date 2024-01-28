@@ -35,8 +35,40 @@
                             </div>
                         </div>
 
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="" class="form-label">Barang</label>
+                                    <input type="text" id="myInput" oninput="myFunction()"
+                                        placeholder="Search for names.." title="Type in a name">
+                                    <ul id="myUL">
+                                        @foreach ($barangs as $barang)
+                                            <li>
+                                                <div class="form-check">
+                                                    <input class="form-check-input cb" type="checkbox"
+                                                        value="{{ $barang->id }}" id="flexCheckDefault" name="barang_id[]"
+                                                        placeholder="{{ $barang->barang_name }}">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        {{ $barang->barang_name }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <form-group>
+                                    <label for="" class="form-label">Barang Dipilih :</label>
+                                    <ul class="ul">
 
-                        <div class="card" id="barang3">
+                                    </ul>
+                                </form-group>
+                            </div>
+                        </div>
+                        {{-- <div class="card" id="barang3">
                             <div class="card-body">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Barang</label>
@@ -72,7 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
