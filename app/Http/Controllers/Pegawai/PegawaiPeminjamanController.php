@@ -12,22 +12,15 @@ class PegawaiPeminjamanController extends Controller
 {
     public function index()
     {
-        $dataBarangDipinjam = Peminjaman::where('user_id', auth()->user()->id)
-                            ->where(function($query){
-                                $query->where('status', '!=', 'sudah kembali')
-                                ->where('status', '!=', 'dibatalkan');
-                            })
-                            ->count('total');
-        
         $dataPeminjaman = Peminjaman::where('user_id', auth()->user()->id)
                             ->where(function($query){
                                 $query->where('status', '!=', 'sudah kembali')
                                 ->where('status', '!=', 'dibatalkan');
                             })->get();
-        
+
         return view('pegawai/peminjaman/index', [
             'peminjamans' => $dataPeminjaman,
-            'totalDipinjam' => $dataBarangDipinjam
+            'totalDipinjam' => $this->getTotalPinjam()
         ]);
     }
 
@@ -36,7 +29,7 @@ class PegawaiPeminjamanController extends Controller
         $dataBarang = Barang::where('status', 'LIKE', 'tersedia')
                     ->where('kondisi', 'LIKE', 'baik')
                     ->get();
-
+        
         return view('pegawai/peminjaman/create', [
             'pegawai' => auth()->user(),
             'barangs' => $dataBarang
@@ -45,7 +38,11 @@ class PegawaiPeminjamanController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->barang_id === null){
+        $totalBarang = $this->getTotalPinjam() + count($request->barang_id);
+
+        if ($totalBarang > 3){
+            return back()->with("success", "Barang Pinjam dan belum dikembalikan tidak boleh lebih dari 3");
+        } elseif ($request->barang_id === null){
             return back()->with("success", "Pilih Barang Terlebih Dahulu");
         } elseif (count($request->barang_id) > 3) {
             return back()->with("success", "Barang Tidak Boleh Lebih Dari 3");
@@ -136,5 +133,20 @@ class PegawaiPeminjamanController extends Controller
         return view('pegawai/peminjaman/history', [
             'peminjaman' => $dataPeminjaman
         ]);
+    }
+
+    public function getTotalPinjam()
+    {
+        $dataBarangDipinjam = Peminjaman::with('peminjaman_detail')->where('user_id', auth()->user()->id)
+                                ->where(function($query){
+                                    $query->where('status', '!=', 'sudah kembali')
+                                    ->where('status', '!=', 'dibatalkan');
+                                })->get();
+        $totalDipinjam = 0;
+        for($i = 0; $i < count($dataBarangDipinjam); $i++) {
+            $totalDipinjam += $dataBarangDipinjam[$i]->total;
+        }
+
+        return $totalDipinjam;
     }
 }
