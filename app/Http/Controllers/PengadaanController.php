@@ -73,8 +73,8 @@ class PengadaanController extends Controller
 
     public function show($id)
     {
-        $dataPengadaan = Pengadaan::findOrFail($id);
-
+        $dataPengadaan = Pengadaan::with('barang', 'pengadaan_detail')->findOrFail($id);
+        
         return view('pengadaan/show', [
             'pengadaan' => $dataPengadaan
         ]);

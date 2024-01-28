@@ -67,18 +67,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($pengadaan->pengadaan_detail[0]->barang_id == null)
+                                    @foreach ($pengadaan->pengadaan_detail as $barang)
+                                        <tr>
+                                            <td class="text-center" width="1">{{ $loop->iteration }}</td>
+                                            <td>{{ $barang->barang_name ?? 'null' }}</td>
+                                            <td>{{ $barang->barang_code ?? 'barang baru' }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
                                 @foreach ($pengadaan->barang as $barang)
                                     <tr>
                                         <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                         <td>{{ $barang->barang_name ?? 'null' }}</td>
                                         <td>{{ $barang->barang_code ?? 'null' }}</td>
-                                    </tr>
-                                @endforeach
-                                @foreach ($pengadaan->pengadaan_detail as $barang)
-                                    <tr>
-                                        <td class="text-center" width="1">{{ $loop->iteration }}</td>
-                                        <td>{{ $barang->barang_name ?? 'null' }}</td>
-                                        <td>{{ $barang->barang_code ?? 'barang baru' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

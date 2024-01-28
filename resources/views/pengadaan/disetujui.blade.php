@@ -43,6 +43,11 @@
                                                 echo $brg->barang_name . '<br>';
                                             }
                                             ?>
+                                                <?php
+                                                foreach ($pengadaan->pengadaan_detail as $brg) {
+                                                    echo $brg->barang_name . '<br>';
+                                                }
+                                                ?>
                                             </td>
                                             <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
