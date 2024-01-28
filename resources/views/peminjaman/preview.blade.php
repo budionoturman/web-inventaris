@@ -53,16 +53,20 @@
                 <div class="row">
                     <section class="sheet padding-10mm">
                         {{-- <h3>Surat Keretangan </h3> --}}
-                        <p>Perihal : Surat Peminjaman</p>
-                        <p>Tanggal : {{ $peminjaman->tgl_pinjam }}</p>
+                        <p class="text-center">FORMULIR PEMINJAMAN BARANG INVENTARIS</p>
                         <br>
-                        <p>Dengan hormat,<br>
-                            Yang bertanda tangan dibawah ini : <br>
-                            Nama :{{ $staff->name }} <br>
-                            NIP : {{ $staff->nip }}<br>
-                            Jabatan : {{ $staff->role->role_name }}</p>
-
-                        <p>Bermaksud untuk meminjamkan barang dengan rincian sebagai berikut:</p>
+                        <br>
+                        <p>Data Peminjam :</p>
+                        <p>
+                            Kepada : {{ $peminjaman->user->name }} <br>
+                            NIP : {{ $peminjaman->user->nip }} <br>
+                            No.Hp : {{ $peminjaman->user->no_hp }} <br>
+                            Jabatan : {{ $peminjaman->user->role->role_name }} <br>
+                            <br>
+                            <br>
+                            Tanggal Pinjam : {{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}
+                        </p>
+                        <br>
                         <table class="table" border="0">
                             <thead>
                                 <tr>
@@ -81,26 +85,21 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <p>
-                            Kepada : {{ $peminjaman->user->name }} <br>
-                            NIP : {{ $peminjaman->user->nip }} <br>
-                            Jabatan : {{ $peminjaman->user->role->role_name }}
-                        </p>
-                        <p>Demikian kami sampaikan, atas perhatian dan kerjasamanya diucapkan terima kasih.</p>
                         <br>
                         <br>
                         <br>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Mengetahui,<br>
-                                        Kepala SMK Avicena Rajeg <br>
+                                    <th>
+                                        Peminjam <br>
                                         <br>
                                         <br>
                                         <br>
-                                        <p>Muhammad Subur, S.Pd.,MM</p>
+                                        <br>
+                                        <p>{{ $peminjaman->user->name }}</p>
                                     </th>
-                                    <th>Kaprog. TI<br>
+                                    <th>Staff Gudang<br>
                                         <br>
                                         <br>
                                         <br>

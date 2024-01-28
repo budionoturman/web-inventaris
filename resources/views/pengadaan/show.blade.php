@@ -52,10 +52,10 @@
                         <br>
                         <br>
                         <p>Dengan hormat,<br>
-                            Yang bertanda tangan dibawah ini, Kepala SMK Avicena Rajeg: <br>
-                            Nama :Muhammad Subur, S.Pd.,MM <br>
-                            NIP : <br>
-                            Jabatan : Kepala SMK Avicena Rajeg</p>
+                            Yang bertanda tangan dibawah ini : <br>
+                            Nama :Suhendra, S.Kom <br>
+                            NIP : 105198765<br>
+                            Jabatan : Kaprog. TI</p>
 
                         <p>Bermaksud untuk mengajukan permohonan pengadaan barang dengan rincian sebagai berikut:</p>
                         <table class="table" border="0">
@@ -83,19 +83,20 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Mengetahui,<br>
-                                        Kepala SMK Avicena Rajeg <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <p>Muhammad Subur, S.Pd.,MM</p>
-                                    </th>
                                     <th>Kaprog. TI<br>
                                         <br>
                                         <br>
                                         <br>
                                         <br>
                                         <p>Suhendra, S.Kom</p>
+                                    </th>
+                                    <th>
+                                        Kepala SMK Avicena Rajeg <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p>Muhammad Subur, S.Pd.,MM</p>
                                     </th>
                                 </tr>
                             </thead>
