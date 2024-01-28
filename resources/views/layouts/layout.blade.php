@@ -324,7 +324,7 @@
             });
 
             $(function() {
-                $('#selectkategori').select2({
+                $('.selectkategori').select2({
                     placeholder: 'Select Kategori',
                     ajax: {
                         url: '/getkategori',
@@ -335,7 +335,7 @@
                                 results: $.map(data, function(item) {
                                     return {
                                         text: item.kategori_name,
-                                        id: item.id
+                                        id: item.id,
                                     }
                                 })
                             };

@@ -64,6 +64,8 @@ Route::middleware('auth')->group(function() {
 
     Route::get('pengadaans', [PengadaanController::class, 'index']);
     Route::get('pengadaans/create', [PengadaanController::class, 'create']);
+    Route::get('pengadaans/tambah', [PengadaanController::class, 'tambah']);
+    Route::post('pengadaan/simpan', [PengadaanController::class, 'simpan']);
     Route::post('pengadaans', [PengadaanController::class, 'store']);
     Route::get('pengadaans/{id}', [PengadaanController::class, 'show']);
     Route::post('pengadaans/setujui/{id}', [PengadaanController::class, 'setujui']);

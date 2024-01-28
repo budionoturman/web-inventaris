@@ -74,6 +74,13 @@
                                         <td>{{ $barang->barang_code ?? 'null' }}</td>
                                     </tr>
                                 @endforeach
+                                @foreach ($pengadaan->pengadaan_detail as $barang)
+                                    <tr>
+                                        <td class="text-center" width="1">{{ $loop->iteration }}</td>
+                                        <td>{{ $barang->barang_name ?? 'null' }}</td>
+                                        <td>{{ $barang->barang_code ?? 'barang baru' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <p>Demikian kami sampaikan, atas perhatian dan kerjasamanya diucapkan terima kasih.</p>

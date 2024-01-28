@@ -11,13 +11,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="kategori_id" class="form-label">Kategori</label>
-                                <select class="form-control selectkategori select2" id="kategori_id selectkategori"
-                                    name="kategori_id" required>
-                                    @foreach ($kategoris as $kategori)
-                                        <option value="{{ $kategori->id }}">
-                                            {{ $kategori->kategori_name }}
-                                        </option>
-                                    @endforeach
+                                <select class="form-control selectkategori select2" id="kategori_id" name="kategori_id"
+                                    required>
                                 </select>
                             </div>
                             <div class="mb-3">

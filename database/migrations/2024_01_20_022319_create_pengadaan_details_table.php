@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('pengadaan_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pengadaan_id');
-            $table->foreignId('barang_id');
+            $table->foreignId('barang_id')->nullable();
+            $table->string('barang_name')->nullable();
+            $table->string('kategori_id')->nullable();
             $table->timestamps();
         });
     }

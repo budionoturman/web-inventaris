@@ -21,7 +21,7 @@ class PengadaanController extends Controller
             ->orWhere('status', 'like', 'rusak');
         })->get();
 
-        $dataPengadaan = Pengadaan::where(function($query){
+        $dataPengadaan = Pengadaan::with('pengadaan_detail')->where(function($query){
             $query->where('status', 'like', 'pengajuan');
         })->get();
 
@@ -33,14 +33,6 @@ class PengadaanController extends Controller
 
     public function create()
     {
-        //nomor surat       
-        $tahun = Carbon::now('Y');
-        $AWAL = 'PGB';
-        $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
-        $noUrutAkhir = Pengadaan::max('id');
-        $no = "0".$noUrutAkhir + 1;
-        $no_surat = $no . '/' . $AWAL . '/' . $bulanRomawi[date('n')] . '/' . $tahun->year;
-
         $dataBarang = Barang::where(function($query){
             $query->where('kondisi', 'like', 'hilang')
             ->orWhere('status', 'like', 'rusak');
@@ -49,7 +41,7 @@ class PengadaanController extends Controller
         return view('pengadaan/create', [
             'user' => auth()->user(),
             'barangs' => $dataBarang,
-            'no_surat' => $no_surat
+            'no_surat' => $this->createNoSurat()
         ]);
     }
 
@@ -145,18 +137,44 @@ class PengadaanController extends Controller
         $validatedData['path'] = $file->store('toPath', ['disk' => 'public_uploads_kwitansi']);
 
 
-        //update table barang
-        for($i = 0; $i < count($request->barang_id); $i++) {
-            Barang::where('id', $request->barang_id[$i])->update([
-                'status' => 'tersedia',
-                'kondisi' => 'baik'
-            ]);
-            
-            BarangTidakDipakai::create([
-                'barang_name' => $request->barang_name[$i],
-                'kategori_id' => $request->kategori_id[$i],
-                'tgl_masuk' => now()
-            ]);
+        if ($request->barang_id === null){
+            // create table barang
+            // return "store barang baru";
+            for ($i = 0; $i < count($request->barang_name); $i++){
+                $dataKategori = Kategori::find($request->kategori_id[$i])->get();
+
+                $kodeJurusan = $dataKategori[$i]->jurusan->jurusan_code;
+                $kodeKategori = $dataKategori[$i]->kategori_code;
+
+                $noUrutAkhir = Barang::max('id');
+                $no = "0".$noUrutAkhir + 1;
+
+                // $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no++;
+
+                Barang::create([
+                    'kategori_id' => $request->kategori_id[$i],
+                    'barang_code' => $kodeJurusan.'/'.$kodeKategori.'/'.$no++,
+                    'barang_name' => $request->barang_name[$i],
+                    'tgl_masuk' => $request->tgl_beli,
+                    'status' => 'tersedia',
+                    'kondisi' => 'baik'
+                ]);
+            }
+        } else {
+            //update table barang
+            // return "update barang";
+            for($i = 0; $i < count($request->barang_id); $i++) {
+                Barang::where('id', $request->barang_id[$i])->update([
+                    'status' => 'tersedia',
+                    'kondisi' => 'baik'
+                ]);
+                
+                BarangTidakDipakai::create([
+                    'barang_name' => $request->barang_name[$i],
+                    'kategori_id' => $request->kategori_id[$i],
+                    'tgl_masuk' => now()
+                ]);
+            }
         }
 
         //store ke table kwitansi
@@ -178,5 +196,50 @@ class PengadaanController extends Controller
         return view('pengadaan/sudah-dibeli', [
             'pengadaans' => $dataPengadaan
         ]);
+    }
+
+    public function tambah()
+    {
+        return view('pengadaan/tambah', [
+            'kategoris' => Kategori::all(),
+            'no_surat' => $this->createNoSurat(),
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function simpan(Request $request)
+    {
+        // return $request;
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'no_surat' => 'required',
+            'tgl_pengajuan' => 'required',
+            'status' => 'required'
+        ]);
+
+        $newPengadaan = Pengadaan::create($validatedData);
+
+        for($i = 0; $i < count($request->kategori_id); $i++){
+            PengadaanDetail::create([ 
+                'pengadaan_id' => $newPengadaan->id,
+                'barang_name' => $request->barang_name[$i],
+                'kategori_id' => $request->kategori_id[$i],
+            ]);
+        }
+
+        return redirect('pengadaans')->with('success', 'Berhasil mengajukan Pengadaan');
+    }
+
+    public function createNoSurat()
+    {
+        //nomor surat       
+        $tahun = Carbon::now('Y');
+        $AWAL = 'PGB';
+        $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+        $noUrutAkhir = Pengadaan::max('id');
+        $no = "0".$noUrutAkhir + 1;
+        $no_surat = $no . '/' . $AWAL . '/' . $bulanRomawi[date('n')] . '/' . $tahun->year;
+
+       return $no_surat;
     }
 }

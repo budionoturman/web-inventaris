@@ -17,6 +17,11 @@
                                     <input type="hidden" name="barang_id[]" value="{{ $barang->id }}">
                                     <input type="hidden" name="kategori_id[]" value="{{ $barang->kategori_id }}">
                                 @endforeach
+                                @foreach ($pengadaan->pengadaan_detail as $barang)
+                                    <input type="text" class="form-control my-2" name="barang_name[]"
+                                        value="{{ $barang->barang_name }}" readonly>
+                                    <input type="hidden" name="kategori_id[]" value="{{ $barang->kategori_id }}">
+                                @endforeach
                             </div>
                         </div>
                         <div class="card">

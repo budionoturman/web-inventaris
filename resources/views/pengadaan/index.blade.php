@@ -13,13 +13,20 @@
                             </div>
                         @endif --}}
 
-                        <div class="d-flex inline justify-content-between">
-                            <h5 class="card-title fw-semibold mb-4">Saran Pengadaan Barang</h5>
-                            @canany(['isKepalaStaff', 'isStaffGudang'])
-                                <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/pengadaans/create">Tambah</a>
-                                </button>
-                            @endcanany
+                        <div class=" row justify-content-between">
+                            <div class="col">
+                                <h5 class="card-title fw-semibold mb-4">Barang Rusak/Hilang</h5>
+                            </div>
+                            <div class="col text-end">
+                                @canany(['isKepalaStaff'])
+                                    <button type="button" class="btn btn-outline-secondary m-1">
+                                        <a href="/pengadaans/create">Pengadaan Rusak/Hilang</a>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary m-1">
+                                        <a href="/pengadaans/tambah">Pengadaan</a>
+                                    </button>
+                                @endcanany
+                            </div>
                         </div>
 
                         <div class="table-responsive">
@@ -79,6 +86,11 @@
                                                 echo $brg->barang_name . '<br>';
                                             }
                                             ?>
+                                                <?php
+                                                foreach ($pengadaan->pengadaan_detail as $brg) {
+                                                    echo $brg->barang_name . '<br>';
+                                                }
+                                                ?>
                                             </td>
                                             <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
