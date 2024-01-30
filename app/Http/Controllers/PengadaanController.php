@@ -129,30 +129,25 @@ class PengadaanController extends Controller
         $validatedData['pengadaan_id']= $request->pengadaan_id;
 
         $file = $request->file('kwitansi');
-        
-        $validatedData['file_name'] = $file->getClientOriginalName();
-        $validatedData['file_type'] = $file->getMimeType();
-        $validatedData['size'] = $file->getSize();
-        $validatedData['path'] = $file->store('toPath', ['disk' => 'public_uploads_kwitansi']);
-
 
         if ($request->barang_id === null){
             // create table barang
             // return "store barang baru";
             for ($i = 0; $i < count($request->barang_name); $i++){
-                $dataKategori = Kategori::find($request->kategori_id[$i])->get();
+                $dataKategori = Kategori::with('jurusan')->find($request->kategori_id[$i]);
 
-                $kodeJurusan = $dataKategori[$i]->jurusan->jurusan_code;
-                $kodeKategori = $dataKategori[$i]->kategori_code;
+                // return $dataKategori->jurusan->jurusan_code;
+                $kodeJurusan = $dataKategori->jurusan->jurusan_code;
+                $kodeKategori = $dataKategori->kategori_code;
 
                 $noUrutAkhir = Barang::max('id');
                 $no = "".$noUrutAkhir + 1;
 
-                // $kodeBarangFix = $kodeJurusan. '/'. $kodekategori. '/'. $no++;
+                $kodeBarangFix = $kodeJurusan. '/'. $kodeKategori. '/'. $no++;
 
                 Barang::create([
                     'kategori_id' => $request->kategori_id[$i],
-                    'barang_code' => $kodeJurusan.'/'.$kodeKategori.'/'.$no++,
+                    'barang_code' => $kodeBarangFix,
                     'barang_name' => $request->barang_name[$i],
                     'tgl_masuk' => $request->tgl_beli,
                     'status' => 'tersedia',
@@ -177,6 +172,10 @@ class PengadaanController extends Controller
         }
 
         //store ke table kwitansi
+        $validatedData['file_name'] = $file->getClientOriginalName();
+        $validatedData['file_type'] = $file->getMimeType();
+        $validatedData['size'] = $file->getSize();
+        $validatedData['path'] = $file->store('toPath', ['disk' => 'public_uploads_kwitansi']);
         Kwitansi::create($validatedData);
 
         //update table pengadaan
