@@ -67,7 +67,7 @@ class PengembalianController extends Controller
              
             return redirect('/pengembalians')->with('success', 'Berhasil Mengembalikan Barang');
         } else {
-            return "kembali sebagian";
+            // return "kembali sebagian";
             for($i = 0; $i < count($request->barang_id); $i++)
             {
                 Barang::where('id', $request->barang_id[$i])->update(['status' => 'tersedia']);
