@@ -23,8 +23,9 @@
                                         <a href="/barangs/create">Tambah</a>
                                     </button>
                                 @endcan
-                                <button type="button" class="btn btn-outline-secondary m-1">
-                                    <a href="/barangs-cetak" target="_blank">Cetak</a>
+                                <button type="button" class="btn btn-outline-secondary m-1" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"> Cetak
+                                    {{-- <a href="/barangs-cetak" target="_blank">Cetak</a> --}}
                                 </button>
                             </div>
                         </div>
@@ -77,6 +78,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="/barangs-cetak" method="get">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cetak Barang</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="" class="form-label">Pilih Jurusan</label>
+                        <select class="form-control" name="jurusan_id" id="jurusan_id">
+                            <option value="">Semua Jurusan</option>
+                            <option value="1">Teknik Komputer dan Jaringan</option>
+                            <option value="2">Teknik Otomotif</option>
+                            <option value="3">Multimedia</option>
+                        </select>
+                        <label for="" class="form-label">Pilih Kondisi</label>
+                        <select class="form-control" name="kondisi" id="kondisi">
+                            <option value="">Semua Kondisi</option>
+                            <option value="baik">Baik</option>
+                            <option value="rusak">Rusak</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 @endsection

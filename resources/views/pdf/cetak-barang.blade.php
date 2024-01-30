@@ -54,7 +54,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->barang_name }}</td>
                     <td>{{ $data->barang_code }}</td>
-                    <td>{{ $data->kategori->jurusan->jurusan_name }}</td>
+                    <td>{{ $data->jurusan_name }}</td>
                     <td>{{ $data->kondisi }}</td>
                 </tr>
             @endforeach

@@ -10,6 +10,7 @@ use App\Models\Pengadaan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
@@ -23,10 +24,57 @@ class PdfController extends Controller
         return $pdf->stream('pengadaan-'.$dataPengadaan->no_surat.'.pdf');
     }
 
-    public function cetakBarangs()
+    public function cetakBarangs(Request $request)
     {
+        $dataBarangSemua = DB::table('barangs as B')
+                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                        ->get();
+        
+        $dataBarangByJurusan = DB::table('barangs as B')
+                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                ->where('j.id', '=', $request->jurusan_id)
+                                ->get();
+
+        $dataBarangByKondisi = DB::table('barangs as B')
+                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                ->where('B.kondisi', '=', $request->kondisi)
+                                ->get();
+                                
+        $dataBarangByJurusanAndKondisi = DB::table('barangs as B')
+                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                        ->where('j.id', '=', $request->jurusan_id)
+                                        ->where('B.kondisi', '=', $request->kondisi)
+                                        ->get();
+
+        if ($request->jurusan_id != null && $request->kondisi != null) {
+            // return "by kategori dan kondisi";
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByJurusanAndKondisi
+            ]);
+            return $pdf->stream('data-barang.pdf');
+
+        } elseif ($request->jurusan_id != null) {
+            // return "by jurusan";
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByJurusan
+            ]);
+            return $pdf->stream('data-barang.pdf');
+
+        } elseif ($request->kondisi != null) {
+            // return "by  kondisi";
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByKondisi
+            ]);
+            return $pdf->stream('data-barang.pdf');
+        }
+
+        // return "semua ";
         $pdf = PDF::loadView('pdf/cetak-barang', [
-            'barangs' => Barang::all()
+            'barangs' => $dataBarangSemua
         ]);
         return $pdf->stream('data-barang.pdf');
     }
