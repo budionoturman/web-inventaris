@@ -65,7 +65,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td>{{ $barangs->count() }}</td>
             </tr>
         </table>
     </body>
