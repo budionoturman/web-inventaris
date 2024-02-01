@@ -39,6 +39,12 @@ class PdfController extends Controller
                                 ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
                                 ->where('j.id', '=', $request->jurusan_id)
                                 ->get();
+        
+        $dataBarangByKategori = DB::table('barangs as B')
+                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                ->where('K.id', '=', $request->kategori_id)
+                                ->get();
 
         $dataBarangByKondisi = DB::table('barangs as B')
                                 ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
@@ -103,6 +109,12 @@ class PdfController extends Controller
             ]);
             return $pdf->stream('data-barang.pdf');
 
+        } elseif($request->kategori_id != null) {
+            // return "by kategori";
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByKategori
+            ]);
+            return $pdf->stream('data-barang.pdf');
         } elseif ($request->kondisi != null) {
             // return "by  kondisi";
             $pdf = PDF::loadView('pdf/cetak-barang', [
