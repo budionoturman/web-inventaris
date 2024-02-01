@@ -140,13 +140,13 @@
                     var end = moment($("#tgl_kembali").val());
                     if (end.diff(start, "days") > 5) {
                         var denda = (end.diff(start, "days") - 5) * 5000 * le;
+                        var denda = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-                        var rupiahFormat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                     } else {
                         var denda = 0;
                     }
 
-                    $("#denda").val(rupiahFormat);
+                    $("#denda").val(denda);
                     console.log(denda);
                 });
             });
