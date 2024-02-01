@@ -27,7 +27,7 @@ return [
     'observers'     => false,
     'policies'      => false,
     'providers'     => false,
-    'requests'      => true,
+    'requests'      => false,
     'resources'     => false,
     'rules'         => false,
 

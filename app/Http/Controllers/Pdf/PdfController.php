@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\Strings;
+
+use function Laravel\Prompts\select;
 
 class PdfController extends Controller
 {
@@ -42,6 +45,20 @@ class PdfController extends Controller
                                 ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
                                 ->where('B.kondisi', '=', $request->kondisi)
                                 ->get();
+        
+        $dataBarangByJurusanAndKategori = DB::table('barangs as B')
+                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                        ->where('j.id', '=', $request->jurusan_id)
+                                        ->where('K.id', '=', $request->kategori_id)
+                                        ->get();
+
+        $dataBarangByKondisiAndKategori = DB::table('barangs as B')
+                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                        ->where('B.kondisi', '=', $request->kondisi)
+                                        ->where('K.id', '=', $request->kategori_id)
+                                        ->get();
                                 
         $dataBarangByJurusanAndKondisi = DB::table('barangs as B')
                                         ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
@@ -49,8 +66,30 @@ class PdfController extends Controller
                                         ->where('j.id', '=', $request->jurusan_id)
                                         ->where('B.kondisi', '=', $request->kondisi)
                                         ->get();
-
-        if ($request->jurusan_id != null && $request->kondisi != null) {
+        
+        $dataBarangByJurusanAndKondisiAndKategori = DB::table('barangs as B')
+                                                    ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
+                                                    ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
+                                                    ->where('j.id', '=', $request->jurusan_id)
+                                                    ->where('K.id', '=', $request->kategori_id)
+                                                    ->where('B.kondisi', '=', $request->kondisi)
+                                                    ->get();
+        if($request->jurusan_id != null && $request->kondisi != null && $request->kategori_id != null) {
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByJurusanAndKondisiAndKategori
+            ]);
+            return $pdf->stream('data-barang.pdf');
+        } elseif($request->jurusan_id != null && $request->kategori_id != null) {
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByJurusanAndKategori
+            ]);
+            return $pdf->stream('data-barang.pdf');
+        } elseif($request->kondisi != null && $request->kategori_id != null) {
+            $pdf = PDF::loadView('pdf/cetak-barang', [
+                'barangs' => $dataBarangByKondisiAndKategori
+            ]);
+            return $pdf->stream('data-barang.pdf');
+        } elseif ($request->jurusan_id != null && $request->kondisi != null) {
             // return "by kategori dan kondisi";
             $pdf = PDF::loadView('pdf/cetak-barang', [
                 'barangs' => $dataBarangByJurusanAndKondisi
