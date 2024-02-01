@@ -29,7 +29,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <label for="" class="form-label">Upload Kwintansi</label>
-                                <input type="file" class="form-control" name="kwitansi" required>
+                                <input type="file" class="form-control" id="kwitansi" name="kwitansi"
+                                    onchange="previewImage()" required>
+                            </div>
+                            <div id="imagePreview" class="modal-footer">
+                                <!-- Image preview will be displayed here -->
                             </div>
                         </div>
                         <div class="card">
@@ -46,3 +50,33 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function previewImage() {
+        var fileInput = document.getElementById('kwitansi');
+        var imagePreview = document.getElementById('imagePreview');
+
+        // Ensure that a file is selected
+        if (fileInput.files.length > 0) {
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                // Create an image element and set its source to the data URL
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'img-fluid'; // Optional: You can add a class for styling
+
+                // Clear any previous previews and append the new image
+                imagePreview.innerHTML = '';
+                imagePreview.appendChild(img);
+            };
+
+            // Read the selected file as a data URL
+            reader.readAsDataURL(file);
+        } else {
+            // No file selected, clear the preview
+            imagePreview.innerHTML = '';
+        }
+    }
+</script>

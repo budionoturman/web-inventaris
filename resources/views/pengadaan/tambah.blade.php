@@ -80,7 +80,7 @@
 
         function remove_row(e) {
             var n = document.querySelector("#tbl").querySelectorAll("tr").length;
-            if (n > 1 && confirm("Are You Sure") == true) {
+            if (n > 1 && confirm("Barang ini akan dihapus") == true) {
                 var ele = e.parentNode.parentNode;
                 ele.remove();
                 serial_no();
