@@ -141,10 +141,12 @@
                     if (end.diff(start, "days") > 5) {
                         var denda = (end.diff(start, "days") - 5) * 5000 * le;
 
+                        var rupiahFormat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                     } else {
                         var denda = 0;
                     }
-                    $("#denda").val(denda);
+
+                    $("#denda").val(rupiahFormat);
                     console.log(denda);
                 });
             });
