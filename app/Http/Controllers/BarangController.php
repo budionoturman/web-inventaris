@@ -16,7 +16,9 @@ class BarangController extends Controller
     public function index()
     {
         return view('barang/index', [
-            'barangs' => Barang::all()
+            'barangs' => Barang::all(),
+            'jurusans' => Jurusan::all(),
+            'kategoris' => Kategori::all()
         ]);
     }
 

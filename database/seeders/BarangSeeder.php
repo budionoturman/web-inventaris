@@ -76,7 +76,7 @@ class BarangSeeder extends Seeder
         }
 
         Barang::create([
-            'barang_code' => 'TKJ/SWC/31',
+            'barang_code' => 'TKJ/SWC/30',
             'barang_name' => 'D-LINK SWITCH DES-1024A 24 PORT',
             'status' => 'tersedia',
             'kondisi' => 'baik',
@@ -84,7 +84,7 @@ class BarangSeeder extends Seeder
             'kategori_id' => '4',
         ]);
 
-        for($i = 32; $i < 36; $i++) {
+        for($i = 31; $i < 36; $i++) {
             Barang::create([
                 'barang_code' => 'TKJ/RTR/'.$i,
                 'barang_name' => 'MIKROTIK ROUTERBOARD 750',

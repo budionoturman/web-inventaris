@@ -94,9 +94,16 @@
                         <label for="" class="form-label">Pilih Jurusan</label>
                         <select class="form-control" name="jurusan_id" id="jurusan_id">
                             <option value="">Semua Jurusan</option>
-                            <option value="1">Teknik Komputer dan Jaringan</option>
-                            <option value="2">Teknik Otomotif</option>
-                            <option value="3">Multimedia</option>
+                            @foreach ($jurusans as $jurusan)
+                                <option value="{{ $jurusan->id }}">{{ $jurusan->jurusan_name }}</option>
+                            @endforeach
+                        </select>
+                        <label for="" class="form-label">Pilih Kategori</label>
+                        <select class="form-control" name="kategori_id" id="kategori_id">
+                            <option value="">Semua Kategori</option>
+                            @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}">{{ $kategori->kategori_name }}</option>
+                            @endforeach
                         </select>
                         <label for="" class="form-label">Pilih Kondisi</label>
                         <select class="form-control" name="kondisi" id="kondisi">

@@ -40,7 +40,7 @@
                                                         value="{{ $barang->id }}" id="flexCheckDefault" name="barang_id[]"
                                                         placeholder="{{ $barang->barang_name }}">
                                                     <label class="form-check-label" for="flexCheckDefault">
-                                                        {{ $barang->barang_name }}
+                                                        {{ $barang->barang_name }}. ({{ $barang->kategori->kategori_name }})
                                                     </label>
                                                 </div>
                                             </li>
