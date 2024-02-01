@@ -32,8 +32,10 @@
                                 <input type="file" class="form-control" id="kwitansi" name="kwitansi"
                                     onchange="previewImage()" required>
                             </div>
-                            <div id="imagePreview" class="modal-footer">
-                                <!-- Image preview will be displayed here -->
+                            <div class="card-body">
+                                <div id="imagePreview" class="modal-footer text-center">
+
+                                </div>
                             </div>
                         </div>
                         <div class="card">
