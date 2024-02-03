@@ -238,6 +238,15 @@ class PengadaanController extends Controller
         ]);
     }
 
+    public function pengadaanHistory()
+    {
+        $dataPengadaan = Pengadaan::all();
+        // return $dataPengadaan;
+        return view("pengadaan/history", [
+            'pengadaans' => $dataPengadaan
+        ]);
+    }
+
     public function tambah()
     {
         return view('pengadaan/tambah', [

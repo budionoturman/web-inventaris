@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function() {
     Route::get('pengadaan/upload-kwitansi/{id}', [PengadaanController::class, 'createKwitansi']);
     Route::post('pengadaan/upload-kwitansi', [PengadaanController::class, 'storeKwitansi']);
     Route::get('/pengadaan/dibeli/', [PengadaanController::class, 'pengadaanDibeli']);
+    Route::get('/pengadaan/history/', [PengadaanController::class, 'pengadaanHistory']);
 
     //Route Pdf//
     Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);
