@@ -68,6 +68,10 @@
                                                         <button type="submit" class="btn btn-outline-danger m-1"><i
                                                                 class="fa-solid fa-trash-can"></i></button>
                                                     </form>
+                                                    <a href="/barangs/{{ $barang->id }}">
+                                                        <button type="button" class="btn btn-outline-success m-1"><i
+                                                                class="fa-solid fa-eye"></i></button>
+                                                    </a>
                                                 </td>
                                             @endcan
                                         </tr>
