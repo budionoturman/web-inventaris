@@ -25,14 +25,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($peminjamans as $peminjaman)
+                                    @foreach ($peminjamans as $peminjamanDetail)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $peminjaman->peminjaman->user->name }}</td>
-                                            <td>{{ $peminjaman->peminjaman->user->nip }}</td>
-                                            <td>{{ $peminjaman->peminjaman->user->no_hp }}</td>
-                                            <td>{{ $peminjaman->peminjaman->tgl_pinjam }}</td>
-                                            <td>{{ $peminjaman->peminjaman->tgl_kembali }}</td>
+                                            <td>{{ $peminjamanDetail->peminjaman->user->name }}</td>
+                                            <td>{{ $peminjamanDetail->peminjaman->user->nip }}</td>
+                                            <td>{{ $peminjamanDetail->peminjaman->user->no_hp }}</td>
+                                            <td>{{ $peminjamanDetail->peminjaman->tgl_pinjam }}</td>
+                                            <td>{{ $peminjamanDetail->peminjaman->tgl_kembali }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

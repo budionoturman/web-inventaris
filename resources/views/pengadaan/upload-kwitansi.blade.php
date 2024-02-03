@@ -16,6 +16,7 @@
                                         <input type="text" class="form-control my-2" name="barang_name[]"
                                             value="{{ $barang->barang_name }}" readonly>
                                         <input type="hidden" name="kategori_id[]" value="{{ $barang->kategori_id }}">
+                                        <input type="hidden" name="jumlah[]" value="{{ $barang->jumlah }}">
                                     @endforeach
                                 @endif
                                 @foreach ($pengadaan->barang as $barang)

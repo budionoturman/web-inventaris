@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('barang_id')->nullable();
             $table->string('barang_name')->nullable();
             $table->string('kategori_id')->nullable();
+            $table->string('jumlah')->nullable();
             $table->timestamps();
         });
     }

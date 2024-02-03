@@ -121,7 +121,7 @@ class PengadaanController extends Controller
 
     public function storeKwitansi(Request $request)
     {
-        // return $request;
+        // return $request->jumlah;
         $validatedData = $request->validate([
             'kwitansi' => 'required|file',
             'tgl_beli' => 'required'
@@ -140,19 +140,21 @@ class PengadaanController extends Controller
                 $kodeJurusan = $dataKategori->jurusan->jurusan_code;
                 $kodeKategori = $dataKategori->kategori_code;
 
-                $noUrutAkhir = Barang::max('id');
-                $no = "".$noUrutAkhir + 1;
-
-                $kodeBarangFix = $kodeJurusan. '/'. $kodeKategori. '/'. $no++;
-
-                Barang::create([
-                    'kategori_id' => $request->kategori_id[$i],
-                    'barang_code' => $kodeBarangFix,
-                    'barang_name' => $request->barang_name[$i],
-                    'tgl_masuk' => $request->tgl_beli,
-                    'status' => 'tersedia',
-                    'kondisi' => 'baik'
-                ]);
+                for ($j= 0; $j < $request->jumlah[$i]; $j++) {
+                    $noUrutAkhir = Barang::max('id');
+                    $no = "".$noUrutAkhir + 1;
+    
+                    $kodeBarangFix = $kodeJurusan. '/'. $kodeKategori. '/'. $no++;
+                    
+                    Barang::create([
+                        'kategori_id' => $request->kategori_id[$i],
+                        'barang_code' => $kodeBarangFix,
+                        'barang_name' => $request->barang_name[$i],
+                        'tgl_masuk' => $request->tgl_beli,
+                        'status' => 'tersedia',
+                        'kondisi' => 'baik'
+                    ]);
+                }
             }
         } else {
             //update table barang
@@ -222,6 +224,7 @@ class PengadaanController extends Controller
                 'pengadaan_id' => $newPengadaan->id,
                 'barang_name' => $request->barang_name[$i],
                 'kategori_id' => $request->kategori_id[$i],
+                'jumlah' => $request->jumlah[$i],
             ]);
         }
 
