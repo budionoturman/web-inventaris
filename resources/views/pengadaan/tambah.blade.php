@@ -15,7 +15,7 @@
                                 <label class="form-label">Pegawai</label>
                                 <input type="text" class="form-control" placeholder="{{ $user->name }}" readonly>
                                 <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                <label class="form-label mt-3">Pegawai</label>
+                                <label class="form-label mt-3">No Surat</label>
                                 <input type="text" class="form-control" name="no_surat" value="{{ $no_surat }}"
                                     readonly>
                             </div>
@@ -41,9 +41,14 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input class="form-control" type='text' name='barang_name[]' required>
+                                            <td>
+                                                <input class="form-control" type='text' name='barang_name[]' required>
                                             </td>
-                                            <td><input class="btn btn-success" type='button' value='+'
+                                            <td>
+                                                <input class="form-control" type='number' name='jumlah[]' required>
+                                            </td>
+                                            <td>
+                                                <input class="btn btn-success" type='button' value='+'
                                                     onclick='add_row()'>
                                             </td>
                                             <td><input class="btn btn-danger" type='button' value='-'
@@ -74,7 +79,7 @@
         function add_row() {
             var tr = document.createElement("tr");
             tr.innerHTML =
-                "<td><select class='form-control selectkategori select2' id='kategori_id[]' name='kategori_id[]'>@foreach ($kategoris as $kategori)<option value='{{ $kategori->id }}'>{{ $kategori->kategori_name }}</option>@endforeach</select></td><td><input type='text'class='form-control' name='barang_name[]' required></td> <td><input type='button' value='+' onclick='add_row()' class='btn btn-success btn-xs'></td> <td><input type='button' value='-' onclick='remove_row(this)' class='btn btn-danger btn-xs'></td>";
+                "<td><select class='form-control selectkategori select2' id='kategori_id[]' name='kategori_id[]'>@foreach ($kategoris as $kategori)<option value='{{ $kategori->id }}'>{{ $kategori->kategori_name }}</option>@endforeach</select></td><td><input type='text'class='form-control' name='barang_name[]' required></td> <td><input class='form-control' type='number' name='jumlah[]' required></td> <td><input type='button' value='+' onclick='add_row()' class='btn btn-success btn-xs'></td> <td><input type='button' value='-' onclick='remove_row(this)' class='btn btn-danger btn-xs'></td>";
             document.getElementById("tbl").appendChild(tr);
         }
 

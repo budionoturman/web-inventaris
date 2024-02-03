@@ -11,6 +11,7 @@ use App\Models\Pengadaan;
 use App\Models\PengadaanDetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use PhpParser\Node\Stmt\Return_;
 
 class PengadaanController extends Controller
 {
@@ -82,11 +83,50 @@ class PengadaanController extends Controller
 
     public function setujui($id)
     {
-        $pengadaan = Pengadaan::findOrFail($id);
-        $pengadaan->status = "disetujui";
-        $pengadaan->save();
+        $dataPengadaan = Pengadaan::with('barang', 'pengadaan_detail')->find($id);
+        // return $dataPengadaan;
+        return view("pengadaan/setujui-pengadaan", [
+            'pengadaan' => $dataPengadaan
+        ]);
+        // return $id;
+        // $pengadaan = Pengadaan::findOrFail($id);
+        // $pengadaan->status = "disetujui";
+        // $pengadaan->save();
+        // return redirect('/pengadaans')->with('success', 'Pengadaan Berhasil Disetujui');
+    }
 
-        return redirect('/pengadaans')->with('success', 'Pengadaan Berhasil Disetujui');
+    public function simpanPersetujuan(Request $request) 
+    {
+        // return $request;
+        if($request->pengadaan_detail_id != null) {
+            $result = array_diff($request->pengadaan_detail_id_semua, $request->pengadaan_detail_id);
+            // return $result;
+            if ($result != null) {
+                // return $result;
+                PengadaanDetail::destroy($result);
+            }
+            // return "disetujui semua";
+            Pengadaan::where('id', $request->pengadaan_id)->update([
+                'status' => 'disetujui'
+            ]);
+
+            return redirect('/pengadaan/disetujui')->with('success', 'Pengadaan Berhasil Disetujui');
+
+        } elseif ($request->barang_name != null) {
+            // return "pengadaan yang biasa";
+            for ($i = 0; $i < count($request->pengadaan_detail_id_biasa); $i++) {
+                PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->update([
+                    'jumlah' => $request->jumlah[$i]
+                ]);
+            }
+            Pengadaan::where('id', $request->pengadaan_id)->update([
+                'status' => 'disetujui'
+            ]);
+            return redirect('/pengadaan/disetujui')->with('success', 'Pengadaan Berhasil Disetujui');
+        }
+
+        return back()->with("success", "Ceklis terlebih dahulu atau kembali untuk tolak pengajuan");
+
     }
 
     public function tolak($id)
@@ -121,7 +161,7 @@ class PengadaanController extends Controller
 
     public function storeKwitansi(Request $request)
     {
-        // return $request;
+        // return $request->jumlah;
         $validatedData = $request->validate([
             'kwitansi' => 'required|file',
             'tgl_beli' => 'required'
@@ -140,19 +180,21 @@ class PengadaanController extends Controller
                 $kodeJurusan = $dataKategori->jurusan->jurusan_code;
                 $kodeKategori = $dataKategori->kategori_code;
 
-                $noUrutAkhir = Barang::max('id');
-                $no = "".$noUrutAkhir + 1;
-
-                $kodeBarangFix = $kodeJurusan. '/'. $kodeKategori. '/'. $no++;
-
-                Barang::create([
-                    'kategori_id' => $request->kategori_id[$i],
-                    'barang_code' => $kodeBarangFix,
-                    'barang_name' => $request->barang_name[$i],
-                    'tgl_masuk' => $request->tgl_beli,
-                    'status' => 'tersedia',
-                    'kondisi' => 'baik'
-                ]);
+                for ($j= 0; $j < $request->jumlah[$i]; $j++) {
+                    $noUrutAkhir = Barang::max('id');
+                    $no = "".$noUrutAkhir + 1;
+    
+                    $kodeBarangFix = $kodeJurusan. '/'. $kodeKategori. '/'. $no++;
+                    
+                    Barang::create([
+                        'kategori_id' => $request->kategori_id[$i],
+                        'barang_code' => $kodeBarangFix,
+                        'barang_name' => $request->barang_name[$i],
+                        'tgl_masuk' => $request->tgl_beli,
+                        'status' => 'tersedia',
+                        'kondisi' => 'baik'
+                    ]);
+                }
             }
         } else {
             //update table barang
@@ -196,6 +238,15 @@ class PengadaanController extends Controller
         ]);
     }
 
+    public function pengadaanHistory()
+    {
+        $dataPengadaan = Pengadaan::all();
+        // return $dataPengadaan;
+        return view("pengadaan/history", [
+            'pengadaans' => $dataPengadaan
+        ]);
+    }
+
     public function tambah()
     {
         return view('pengadaan/tambah', [
@@ -222,6 +273,7 @@ class PengadaanController extends Controller
                 'pengadaan_id' => $newPengadaan->id,
                 'barang_name' => $request->barang_name[$i],
                 'kategori_id' => $request->kategori_id[$i],
+                'jumlah' => $request->jumlah[$i],
             ]);
         }
 

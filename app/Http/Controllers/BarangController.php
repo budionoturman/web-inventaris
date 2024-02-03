@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Jurusan;
 use App\Models\Kategori;
+use App\Models\Peminjaman;
+use App\Models\PeminjamanDetail;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -69,7 +72,13 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        $peminjamanDetail =  PeminjamanDetail::with('peminjaman')->where('barang_id', $barang->id)->get();
+        
+        return view("barang/show", [
+            'peminjamans' => $peminjamanDetail
+        ]);
+
+
     }
 
     /**
