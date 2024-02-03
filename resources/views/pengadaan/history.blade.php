@@ -43,7 +43,12 @@
                                                     @endforeach
                                                 @endif
                                             </td>
-                                            <td>{{ Carbon\Carbon::parse($pengadaan->tgl_beli)->format('d-M-Y') }}</td>
+                                            <td>
+                                                @if ($pengadaan->kwitansi != null)
+                                                    {{ Carbon\Carbon::parse($pengadaan->kwitansi->tgl_beli)->format('d-M-Y') }}
+                                                @endif
+                                                Ditolak
+                                            </td>
                                             <td>
                                                 @if ($pengadaan->kwitansi != null)
                                                     <a href="{{ asset('kwitansi') }}/{{ $pengadaan->kwitansi->path }}"
