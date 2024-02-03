@@ -11,6 +11,7 @@ use App\Models\Pengadaan;
 use App\Models\PengadaanDetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use PhpParser\Node\Stmt\Return_;
 
 class PengadaanController extends Controller
 {
@@ -82,11 +83,50 @@ class PengadaanController extends Controller
 
     public function setujui($id)
     {
-        $pengadaan = Pengadaan::findOrFail($id);
-        $pengadaan->status = "disetujui";
-        $pengadaan->save();
+        $dataPengadaan = Pengadaan::with('barang', 'pengadaan_detail')->find($id);
+        // return $dataPengadaan;
+        return view("pengadaan/setujui-pengadaan", [
+            'pengadaan' => $dataPengadaan
+        ]);
+        // return $id;
+        // $pengadaan = Pengadaan::findOrFail($id);
+        // $pengadaan->status = "disetujui";
+        // $pengadaan->save();
+        // return redirect('/pengadaans')->with('success', 'Pengadaan Berhasil Disetujui');
+    }
 
-        return redirect('/pengadaans')->with('success', 'Pengadaan Berhasil Disetujui');
+    public function simpanPersetujuan(Request $request) 
+    {
+        // return $request;
+        if($request->pengadaan_detail_id != null) {
+            $result = array_diff($request->pengadaan_detail_id_semua, $request->pengadaan_detail_id);
+            // return $result;
+            if ($result != null) {
+                // return $result;
+                PengadaanDetail::destroy($result);
+            }
+            // return "disetujui semua";
+            Pengadaan::where('id', $request->pengadaan_id)->update([
+                'status' => 'disetujui'
+            ]);
+
+            return redirect('/pengadaan/disetujui')->with('success', 'Pengadaan Berhasil Disetujui');
+
+        } elseif ($request->barang_name != null) {
+            // return "pengadaan yang biasa";
+            for ($i = 0; $i < count($request->pengadaan_detail_id_biasa); $i++) {
+                PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->update([
+                    'jumlah' => $request->jumlah[$i]
+                ]);
+            }
+            Pengadaan::where('id', $request->pengadaan_id)->update([
+                'status' => 'disetujui'
+            ]);
+            return redirect('/pengadaan/disetujui')->with('success', 'Pengadaan Berhasil Disetujui');
+        }
+
+        return back()->with("success", "Ceklis terlebih dahulu atau kembali untuk tolak pengajuan");
+
     }
 
     public function tolak($id)

@@ -15,7 +15,7 @@
                                 <label class="form-label">Pegawai</label>
                                 <input type="text" class="form-control" placeholder="{{ $user->name }}" readonly>
                                 <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                <label class="form-label mt-3">Pegawai</label>
+                                <label class="form-label mt-3">No Surat</label>
                                 <input type="text" class="form-control" name="no_surat" value="{{ $no_surat }}"
                                     readonly>
                             </div>

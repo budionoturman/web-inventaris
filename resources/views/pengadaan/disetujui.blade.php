@@ -36,16 +36,18 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pengadaan->no_surat }}</td>
-                                            <td><?php
-                                            foreach ($pengadaan->barang as $brg) {
-                                                echo $brg->barang_name . '<br>';
-                                            }
-                                            ?>
-                                                <?php
-                                                foreach ($pengadaan->pengadaan_detail as $brg) {
-                                                    echo $brg->barang_name . '<br>';
-                                                }
-                                                ?>
+                                            <td>
+                                                @if ($pengadaan->pengadaan_detail[0]->barang_id != null)
+                                                    @foreach ($pengadaan->barang as $brg)
+                                                        {{ $brg->barang_name }} <br>
+                                                    @endforeach
+                                                @endif
+
+                                                @if ($pengadaan->pengadaan_detail[0]->barang_id == null)
+                                                    @foreach ($pengadaan->pengadaan_detail as $brg)
+                                                        {{ $brg->barang_name }} <br>
+                                                    @endforeach
+                                                @endif
                                             </td>
                                             <td>{{ Carbon\Carbon::parse($pengadaan->tgl_pengajuan)->format('d-M-Y') }}</td>
                                             <td>{{ $pengadaan->status }}</td>
