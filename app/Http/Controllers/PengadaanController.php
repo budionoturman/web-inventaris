@@ -98,10 +98,6 @@ class PengadaanController extends Controller
     public function simpanPersetujuan(Request $request) 
     {
         // return $request;
-        if (count($request->jumlah) == count(array_keys($request->jumlah, '0', true))) {
-            return back()->with('success', 'input jumlah pengadaan atau kembali untuk menolak pengadaan');
-        }
-
         if($request->pengadaan_detail_id != null) {
             $result = array_diff($request->pengadaan_detail_id_semua, $request->pengadaan_detail_id);
             // return $result;
@@ -118,6 +114,9 @@ class PengadaanController extends Controller
 
         } elseif ($request->barang_name != null) {
             // return "pengadaan yang biasa";
+            if (count($request->jumlah) == count(array_keys($request->jumlah, '0', true))) {
+                return back()->with('success', 'input jumlah pengadaan atau kembali untuk menolak pengadaan');
+            }
             for ($i = 0; $i < count($request->pengadaan_detail_id_biasa); $i++) {
                 PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->update([
                     'jumlah' => $request->jumlah[$i]
