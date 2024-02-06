@@ -48,7 +48,8 @@
                                                     {{ Carbon\Carbon::parse($pengadaan->kwitansi->tgl_beli)->format('d-M-Y') }}
                                                 @endif
                                                 @if ($pengadaan->kwitansi == null)
-                                                    Ditolak
+                                                    <button
+                                                        class="btn btn-outline-warning">{{ $pengadaan->status }}</button>
                                                 @endif
                                             </td>
                                             <td>
