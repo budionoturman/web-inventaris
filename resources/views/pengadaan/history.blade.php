@@ -47,7 +47,9 @@
                                                 @if ($pengadaan->kwitansi != null)
                                                     {{ Carbon\Carbon::parse($pengadaan->kwitansi->tgl_beli)->format('d-M-Y') }}
                                                 @endif
-                                                Ditolak
+                                                @if ($pengadaan->kwitansi == null)
+                                                    Ditolak
+                                                @endif
                                             </td>
                                             <td>
                                                 @if ($pengadaan->kwitansi != null)

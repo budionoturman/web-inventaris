@@ -22,7 +22,7 @@ return [
     'listeners'     => false,
     'mails'         => false,
     'middlewares'   => false,
-    'models'        => true,
+    'models'        => false,
     'notifications' => false,
     'observers'     => false,
     'policies'      => false,
@@ -36,7 +36,7 @@ return [
      * For more information: https://github.com/skanaar/nomnoml
      */
     'style' => [
-        'background' => '#071013',
+        'background' => '#f8faf7',
         'stroke'     => '#EBEBEB',
         'arrowSize'  => 1,
         'bendSize'   => 0.3,
