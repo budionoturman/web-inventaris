@@ -114,10 +114,15 @@ class PengadaanController extends Controller
 
         } elseif ($request->barang_name != null) {
             // return "pengadaan yang biasa";
+            if (count($request->jumlah) == count(array_keys($request->jumlah, '0', true))) {
+                return back()->with('success', 'input jumlah pengadaan atau kembali untuk menolak pengadaan');
+            }
             for ($i = 0; $i < count($request->pengadaan_detail_id_biasa); $i++) {
                 PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->update([
                     'jumlah' => $request->jumlah[$i]
                 ]);
+
+                PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->where('jumlah', 0)->delete();
             }
             Pengadaan::where('id', $request->pengadaan_id)->update([
                 'status' => 'disetujui'

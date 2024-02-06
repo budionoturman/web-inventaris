@@ -113,7 +113,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="denda" class="form-label">Denda Keterlambatan</label>
-                                    <input type="number" class="form-control" name="denda" id="denda" required>
+                                    <input type="number" class="form-control" name="dendaLihat" id="dendaLihat"
+                                        required>
+                                    <input type="hidden" class="form-control" name="denda" id="denda" required>
                                 </div>
                                 <button type="button" class="btn btn-outline-dark" onclick="resetForm()">reset</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -140,12 +142,13 @@
                     var end = moment($("#tgl_kembali").val());
                     if (end.diff(start, "days") > 5) {
                         var denda = (end.diff(start, "days") - 5) * 5000 * le;
-                        var denda = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                        var dendaLihat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                     } else {
                         var denda = 0;
                     }
 
+                    $("#dendaLihat").val(dendaLihat);
                     $("#denda").val(denda);
                     console.log(denda);
                 });
