@@ -118,6 +118,8 @@ class PengadaanController extends Controller
                 PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->update([
                     'jumlah' => $request->jumlah[$i]
                 ]);
+
+                PengadaanDetail::where('id', $request->pengadaan_detail_id_biasa[$i])->where('jumlah', 0)->delete();
             }
             Pengadaan::where('id', $request->pengadaan_id)->update([
                 'status' => 'disetujui'
