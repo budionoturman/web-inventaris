@@ -63,6 +63,9 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama Barang</th>
+                                    @if ($pengadaan->pengadaan_detail[0]->barang_id == null)
+                                        <th>Jumlah</th>
+                                    @endif
                                     <th>Kode Barang</th>
                                 </tr>
                             </thead>
@@ -72,6 +75,7 @@
                                         <tr>
                                             <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                             <td>{{ $barang->barang_name ?? 'null' }}</td>
+                                            <td>{{ $barang->jumlah ?? 'null' }}</td>
                                             <td>{{ $barang->barang_code ?? 'barang baru' }}</td>
                                         </tr>
                                     @endforeach

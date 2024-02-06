@@ -98,6 +98,10 @@ class PengadaanController extends Controller
     public function simpanPersetujuan(Request $request) 
     {
         // return $request;
+        if (count($request->jumlah) == count(array_keys($request->jumlah, '0', true))) {
+            return back()->with('success', 'input jumlah pengadaan atau kembali untuk menolak pengadaan');
+        }
+
         if($request->pengadaan_detail_id != null) {
             $result = array_diff($request->pengadaan_detail_id_semua, $request->pengadaan_detail_id);
             // return $result;
