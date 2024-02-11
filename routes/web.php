@@ -8,9 +8,11 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KondisiBarangController;
 use App\Http\Controllers\Pdf\PdfController;
 use App\Http\Controllers\Pegawai\PegawaiPeminjamanController;
+use App\Http\Controllers\Pegawai\RequestBarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\RequestBarangMasukController;
 use App\Http\Controllers\Select\SelectController;
 use App\Http\Controllers\UserController;
 use App\Models\Pengadaan;
@@ -77,6 +79,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/pengadaan/dibeli/', [PengadaanController::class, 'pengadaanDibeli']);
     Route::get('/pengadaan/history/', [PengadaanController::class, 'pengadaanHistory']);
 
+    Route::get('request-barang-masuk', [RequestBarangMasukController::class, 'index']);
+    Route::get('request-barang-masuk/{id}/edit', [RequestBarangMasukController::class, 'edit']);
+    Route::put('request-barang-masuk/{id}', [RequestBarangMasukController::class, 'update']);
+
     //Route Pdf//
     Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);
     Route::get('/barangs-cetak', [PdfController::class, 'cetakBarangs']);
@@ -89,6 +95,7 @@ Route::middleware('auth')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::resource('pegawai/peminjams', PegawaiPeminjamanController::class);
     Route::get('pegawai/history', [PegawaiPeminjamanController::class, 'history']);
+    Route::resource('pegawai/request-barangs', RequestBarangController::class);
 });
 
 // selectpicker
