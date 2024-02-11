@@ -131,8 +131,6 @@
         <script type="text/javascript">
             $(document).ready(function() {
 
-                var totalBarang = {{ $totalBarang }};
-
                 $("#tgl_kembali").change(function() {
 
                     var le = document.querySelectorAll('input[name="barang_id[]"]:checked').length;
@@ -145,7 +143,11 @@
                         var dendaLihat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                     } else {
+<<<<<<< HEAD
                         var dendaLihat = 0;
+=======
+                        var dendaLihat = 0
+>>>>>>> 6e8de7aaed032f16bccc73f5b7b8c2d9ccb3cbb2
                         var denda = 0;
                     }
 

@@ -51,6 +51,14 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/pegawai/request-barangs" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-layout-dashboard"></i>
+                                        </span>
+                                        <span class="hide-menu">Request Barang</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="/pegawai/peminjams" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-users"></i>
@@ -162,6 +170,14 @@
                                 <li class="nav-small-cap">
                                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                     <span class="hide-menu">Pengadaan</span>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/request-barang-masuk" aria-expanded="false">
+                                        <span>
+                                            <i class="fa-solid fa-computer"></i>
+                                        </span>
+                                        <span class="hide-menu">Request Barang Masuk</span>
+                                    </a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="/kondisi-barangs" aria-expanded="false">
