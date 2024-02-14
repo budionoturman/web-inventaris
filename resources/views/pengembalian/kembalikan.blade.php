@@ -143,11 +143,7 @@
                         var dendaLihat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                     } else {
-<<<<<<< HEAD
-                        var dendaLihat = 0;
-=======
                         var dendaLihat = 0
->>>>>>> 6e8de7aaed032f16bccc73f5b7b8c2d9ccb3cbb2
                         var denda = 0;
                     }
 
