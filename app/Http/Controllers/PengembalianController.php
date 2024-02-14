@@ -66,9 +66,24 @@ class PengembalianController extends Controller
                                     'denda' => 0
                                 ]);
             }
-    
-            $peminjam = Peminjaman::findOrFail($request->peminjam_id);
-    
+
+            
+            $peminjam = Peminjaman::with('peminjaman_detail')->find($request->peminjam_id);
+            
+            // cek jika yang kembali dalam keadaan baik semua maka is_denda_bayar menjadi 1 atau true
+            if (count($peminjam->peminjaman_detail) == $peminjam->peminjaman_detail->where('kondisi', 'baik')->count()) {
+                $peminjam = Peminjaman::with('peminjaman_detail')->find($request->peminjam_id);
+
+                $peminjam->tgl_kembali = $request->tgl_kembali;
+                $peminjam->denda += $request->denda;
+                $peminjam->status = "sudah kembali";
+                $peminjam->is_denda_bayar = 1;
+                $peminjam->jumlah_kembali = count($request->barang_id)+$request->jumlah_kembali;
+                $peminjam->save();
+                
+                return redirect('/pengembalians')->with('success', 'Berhasil Mengembalikan Barang');
+            }
+
             $peminjam->tgl_kembali = $request->tgl_kembali;
             $peminjam->denda += $request->denda;
             $peminjam->status = "sudah kembali";

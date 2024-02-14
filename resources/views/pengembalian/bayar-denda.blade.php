@@ -46,20 +46,15 @@
                                     </div>
                                 @endforeach
                             </div>
-                            @if (
-                                $pengembalian->peminjaman_detail[0]->kondisi != 'baik' ||
-                                    $pengembalian->peminjaman_detail[1]->kondisi != 'baik' ||
-                                    $pengembalian->peminjaman_detail[2]->kondisi != 'baik')
-                                <div class="card-body">
-                                    <label for="" class="form-label">Upload Bukti Pembayaran</label>
-                                    <input type="file" class="form-control" id="bukti" name="bukti" required>
-                                </div>
-                                <div class="card-body">
-                                    <label for="" class="form-label">Tanggal pembayaran</label>
-                                    <input type="date" class="form-control" id="tgl_bayar" name="tgl_bayar"
-                                        min="{{ $pengembalian->tgl_pinjam }}" required>
-                                </div>
-                            @endif
+                            <div class="card-body">
+                                <label for="" class="form-label">Upload Bukti Pembayaran</label>
+                                <input type="file" class="form-control" id="bukti" name="bukti" required>
+                            </div>
+                            <div class="card-body">
+                                <label for="" class="form-label">Tanggal pembayaran</label>
+                                <input type="date" class="form-control" id="tgl_bayar" name="tgl_bayar"
+                                    min="{{ $pengembalian->tgl_pinjam }}" required>
+                            </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
