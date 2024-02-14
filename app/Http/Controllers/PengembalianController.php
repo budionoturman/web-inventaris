@@ -76,6 +76,7 @@ class PengembalianController extends Controller
 
                 $peminjam->tgl_kembali = $request->tgl_kembali;
                 $peminjam->denda += $request->denda;
+                $peminjam->dendaTotal += $request->denda;
                 $peminjam->status = "sudah kembali";
                 $peminjam->is_denda_bayar = 1;
                 $peminjam->jumlah_kembali = count($request->barang_id)+$request->jumlah_kembali;
