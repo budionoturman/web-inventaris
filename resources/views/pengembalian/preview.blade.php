@@ -88,7 +88,7 @@
                                         @endforeach
                                         <tr>
                                             <td colspan="3">Denda terlambat</td>
-                                            <td>{{ $pengembalian->denda }}</td>
+                                            <td>Rp. {{ $pengembalian->denda }}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="3">Total Denda</td>
@@ -129,4 +129,11 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var denda = {{ $pengembalian->denda }}
+            var dendaLihat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            console.log(dendaLihat)
+        });
+    </script>
 @endsection

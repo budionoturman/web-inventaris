@@ -27,6 +27,7 @@
                                         <tr>
                                             <th>Kategori</th>
                                             <th>Nama Barang</th>
+                                            <th>Jumlah</th>
                                             <th>Add</th>
                                             <th>Remove</th>
                                         </tr>
