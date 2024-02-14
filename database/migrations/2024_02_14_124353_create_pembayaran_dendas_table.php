@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peminjaman_details', function (Blueprint $table) {
+        Schema::create('pembayaran_dendas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('peminjam_id');
-            $table->foreignId('barang_id');
-            $table->string('status')->nullable();
-            $table->string('kondisi')->nullable();
-            $table->string('denda')->nullable();
+            $table->foreignId('peminjaman_id');
+            $table->string('tgl_bayar');
+            $table->string('file_name');
+            $table->string('path');
+            $table->string('file_type');
+            $table->string('size');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peminjaman_details');
+        Schema::dropIfExists('pembayaran_dendas');
     }
 };
