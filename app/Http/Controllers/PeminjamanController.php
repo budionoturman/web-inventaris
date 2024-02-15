@@ -77,7 +77,7 @@ class PeminjamanController extends Controller
             PeminjamanDetail::create([ 
                 'peminjam_id' => $peminjaman->id,
                 'barang_id' => $request->barang_id[$i],
-                'status' => 'belum kembali'
+                'status' => 'belum kembali',
             ]);
         }
 

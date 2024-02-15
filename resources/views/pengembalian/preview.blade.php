@@ -83,7 +83,7 @@
                                                 <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                                 <td>{{ $barang->barang_name ?? 'null' }}</td>
                                                 <td>{{ $barang->pivot->kondisi ?? 'null' }}</td>
-                                                <td></td>
+                                                <td>{{ $barang->pivot->denda ?? 'belum dibayar' }}</td>
                                             </tr>
                                         @endforeach
                                         <tr>

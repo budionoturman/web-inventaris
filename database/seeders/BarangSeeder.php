@@ -15,7 +15,7 @@ class BarangSeeder extends Seeder
      */
     public function run(): void
     {
-        Barang::create(
+        DB::table('barangs')->insert([
             [
                 'barang_code' => 'TKJ/RTR/1',
                 'barang_name' => 'TP-LINK GRID',
@@ -23,6 +23,8 @@ class BarangSeeder extends Seeder
                 'kondisi' => 'baik',
                 'tgl_masuk' => Carbon::now()->format('Y-m-d'),
                 'kategori_id' => '3',
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'barang_code' => 'TKJ/RTR/2',
@@ -31,6 +33,8 @@ class BarangSeeder extends Seeder
                 'kondisi' => 'baik',
                 'tgl_masuk' => Carbon::now()->format('Y-m-d'),
                 'kategori_id' => '3',
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'barang_code' => 'TKJ/RTR/3',
@@ -39,8 +43,10 @@ class BarangSeeder extends Seeder
                 'kondisi' => 'baik',
                 'tgl_masuk' => Carbon::now()->format('Y-m-d'),
                 'kategori_id' => '3',
+                'created_at' => now(),
+                'updated_at' => now()
             ],
-        );
+        ]);
 
         for($i = 4; $i < 14; $i++) {
             Barang::create([

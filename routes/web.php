@@ -55,8 +55,11 @@ Route::middleware('auth')->group(function() {
     Route::get('pengembalians', [PengembalianController::class, 'index']);
     Route::any('kembalikan/{id}',[PengembalianController::class, 'kembalikan']);
     Route::any('storekembali', [PengembalianController::class, 'storekembali']);
+    Route::get('pembayaran-denda', [PengembalianController::class, 'pembayaranDenda']);
+    Route::get('pembayaran-denda/create/{id}', [PengembalianController::class, 'pembayaranDendaCreate']); 
+    Route::post('pembayaran-denda/create', [PengembalianController::class, 'pembayaranDendaStore']); 
     Route::get('history', [PengembalianController::class, 'history']);
-    Route::get('history/preview/{id}', [PengembalianController::class, 'createDenda']);
+    Route::get('history/preview/{id}', [PengembalianController::class, 'preview']);
 
     Route::get('kondisi-barangs', [KondisiBarangController::class, 'index']);
     Route::get('kondisi-barangs/{id}/perbaikan', [KondisiBarangController::class, 'perbaikan']);

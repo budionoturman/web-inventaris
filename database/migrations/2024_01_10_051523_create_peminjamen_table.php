@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('total');
             $table->integer('jumlah_kembali')->nullable();
             $table->string('denda')->nullable();
+            $table->string('dendaTotal')->nullable();
+            $table->integer('is_denda_bayar')->nullable();
             $table->timestamps();
         });
     }

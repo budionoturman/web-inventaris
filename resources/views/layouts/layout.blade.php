@@ -159,6 +159,14 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/pembayaran-denda" aria-expanded="false">
+                                        <span>
+                                            <i class="fa-solid fa-right-left"></i>
+                                        </span>
+                                        <span class="hide-menu">Pembayaran Denda</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link" href="/history" aria-expanded="false">
                                         <span>
                                             <i class="fa-solid fa-clock-rotate-left"></i>
