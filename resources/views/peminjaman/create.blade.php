@@ -108,7 +108,7 @@
 
                         <div class="mb-3">
                             <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
-                            <input type="date" class="form-control" name="tgl_pinjam" required>
+                            <input type="date" class="form-control" name="tgl_pinjam" id="tgl_pinjam" required>
                         </div>
 
                         <div class="mb-3">

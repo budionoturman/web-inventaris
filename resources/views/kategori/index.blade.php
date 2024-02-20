@@ -14,7 +14,7 @@
                         @endif --}}
 
                         <div class="d-flex inline justify-content-between">
-                            <h5 class="card-title fw-semibold mb-4">Tabel Data Jurusan</h5>
+                            <h5 class="card-title fw-semibold mb-4">Tabel Data Kategori</h5>
 
                             @canany(['isKepalaStaff', 'isStaffGudang'])
                                 <button type="button" class="btn btn-outline-secondary m-1">

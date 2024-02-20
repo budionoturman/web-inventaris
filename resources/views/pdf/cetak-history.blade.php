@@ -82,16 +82,16 @@
                                                 <td class="text-center" width="1">{{ $loop->iteration }}</td>
                                                 <td>{{ $barang->barang_name ?? 'null' }}</td>
                                                 <td>{{ $barang->pivot->kondisi ?? 'null' }}</td>
-                                                <td>{{ $barang->pivot->denda ?? 'belum dibayar' }}</td>
+                                                <td>{{ number_format($barang->pivot->denda) ?? 'belum dibayar' }}</td>
                                             </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="3">Denda terlambat</td>
-                                            <td>{{ $pengembalian->denda }}</td>
+                                            <td>{{ number_format($pengembalian->denda) }}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="3">Total Denda</td>
-                                            <td>Rp. {{ $pengembalian->dendaTotal }}</td>
+                                            <td>Rp. {{ number_format($pengembalian->dendaTotal) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

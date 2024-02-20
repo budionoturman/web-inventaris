@@ -38,4 +38,11 @@ class RequestBarangMasukController extends Controller
 
         return redirect('/request-barang-masuk')->with('success', 'Berhasil Ubah Status Request Barang Masuk');
     }
+
+    public function delete($id)
+    {
+        RequestBarang::destroy($id);
+        return redirect('/request-barang-masuk')->with('success', 'Berang dihapus');
+        
+    }
 }
