@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function() {
     Route::get('request-barang-masuk', [RequestBarangMasukController::class, 'index']);
     Route::get('request-barang-masuk/{id}/edit', [RequestBarangMasukController::class, 'edit']);
     Route::put('request-barang-masuk/{id}', [RequestBarangMasukController::class, 'update']);
+    Route::delete('request-barang-masuk/{id}', [RequestBarangMasukController::class, 'delete']);
 
     //Route Pdf//
     Route::get('pengadaans/cetak/{id}', [PdfController::class, 'cetakPengadaan']);

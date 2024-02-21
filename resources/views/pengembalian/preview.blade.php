@@ -89,10 +89,11 @@
                                         <tr>
                                             <td colspan="3">Denda terlambat</td>
                                             <td>Rp. {{ $pengembalian->denda }}</td>
+
                                         </tr>
                                         <tr>
                                             <td colspan="3">Total Denda</td>
-                                            <td></td>
+                                            <td>Rp. {{ $pengembalian->dendaTotal }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -143,8 +143,9 @@
                         var dendaLihat = denda.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                     } else {
-                        var dendaLihat = 0
+
                         var denda = 0;
+                        var dendaLihat = 0;
                     }
 
                     $("#dendaLihat").val(dendaLihat);

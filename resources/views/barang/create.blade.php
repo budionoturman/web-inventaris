@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body">
 
-                <h5 class="card-title fw-semibold mb-4">Form Tambah kategori</h5>
+                <h5 class="card-title fw-semibold mb-4">Form Tambah Barang</h5>
                 <div class="card">
                     <div class="card-body">
                         <form action="/barangs/" method="post">

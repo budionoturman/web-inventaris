@@ -79,6 +79,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <ol>
+                            <li>Melaporkan kepada staff apabila terdapan kerusakan / kesulitan mengoperasikan alat</li>
+                            <li>Barang harus dikembalikan tepat waktu, tidak melebihi 5 hari. Apabila melebihi akan
+                                dikenakan dendan Rp. 5.000 perharinya</li>
+                            <li>Harus bertanggung jawab atas barang yang dirusakkan</li>
+                            <li>harus mengganti barang yang dirusakkan.</li>
+                        </ol>
                         <br>
                         <br>
                         <br>

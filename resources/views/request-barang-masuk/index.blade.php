@@ -34,14 +34,13 @@
                                                         <button type="button" class="btn btn-outline-warning m-1"><i
                                                                 class="fa-solid fa-pen-to-square"></i></button>
                                                     </a>
-                                                @endcanany
-                                                {{-- <form action="/pegawai/request-barangs/{{ $barang->id }}"
-                                                        method="post">
+                                                    <form action="/request-barang-masuk/{{ $barang->id }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-outline-danger m-1"><i
                                                                 class="fa-solid fa-trash-can"></i></button>
-                                                    </form> --}}
+                                                    </form>
+                                                @endcanany
                                             </td>
                                         </tr>
                                     @endforeach
