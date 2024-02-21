@@ -37,7 +37,7 @@ class PdfController extends Controller
         $dataBarangByJurusan = DB::table('barangs as B')
                                 ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
                                 ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                ->where('j.id', '=', $request->jurusan_id)
+                                ->where('J.id', '=', $request->jurusan_id)
                                 ->get();
         
         $dataBarangByKategori = DB::table('barangs as B')
@@ -55,7 +55,7 @@ class PdfController extends Controller
         $dataBarangByJurusanAndKategori = DB::table('barangs as B')
                                         ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
                                         ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                        ->where('j.id', '=', $request->jurusan_id)
+                                        ->where('J.id', '=', $request->jurusan_id)
                                         ->where('K.id', '=', $request->kategori_id)
                                         ->get();
 
@@ -69,14 +69,14 @@ class PdfController extends Controller
         $dataBarangByJurusanAndKondisi = DB::table('barangs as B')
                                         ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
                                         ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                        ->where('j.id', '=', $request->jurusan_id)
+                                        ->where('J.id', '=', $request->jurusan_id)
                                         ->where('B.kondisi', '=', $request->kondisi)
                                         ->get();
         
         $dataBarangByJurusanAndKondisiAndKategori = DB::table('barangs as B')
                                                     ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
                                                     ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                                    ->where('j.id', '=', $request->jurusan_id)
+                                                    ->where('J.id', '=', $request->jurusan_id)
                                                     ->where('K.id', '=', $request->kategori_id)
                                                     ->where('B.kondisi', '=', $request->kondisi)
                                                     ->get();
