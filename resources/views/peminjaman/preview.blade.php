@@ -65,6 +65,9 @@
                             <br>
                             <br>
                             Tanggal Pinjam : {{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->format('d-M-Y') }}
+                            <br>
+                            Tanggal Kembali Maksimal :
+                            {{ Carbon\Carbon::parse($peminjaman->tgl_pinjam)->addDays(5)->format('d-M-Y') }}
                         </p>
                         <br>
                         <table class="table" border="0">
@@ -85,6 +88,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <ol>
+                            <li>Melaporkan kepada staff apabila terdapan kerusakan / kesulitan mengoperasikan alat
+                            </li>
+                            <li>Barang harus dikembalikan tepat waktu, tidak melebihi 5 hari. Apabila melebihi akan
+                                dikenakan dendan Rp. 5.000 perharinya</li>
+                            <li>Harus bertanggung jawab atas barang yang dirusakkan</li>
+                            <li>harus mengganti barang yang dirusakkan.</li>
+                        </ol>
                         <br>
                         <br>
                         <br>
