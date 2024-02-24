@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/barangs-cetak', [PdfController::class, 'cetakBarangs']);
     Route::get('/peminjams-cetak/{id}', [PdfController::class, 'cetakPeminjaman']);
     Route::get('history-cetak/{id}', [PdfController::class, 'cetakHistory']);
+    Route::get('peminjaman/belum-kembali-cetak', [PdfController::class, 'cetakPeminjamanBelumKembali']);
+    Route::get('peminjaman/history', [PdfController::class, 'cetakPeminjamanHistory']);
 });
 
 // route pegawai

@@ -151,4 +151,33 @@ class PdfController extends Controller
         ]);
         return $pdf->stream('history.pdf');
     }
+
+    public function cetakPeminjamanBelumKembali(Request $request)
+    {
+        // return $request;
+        $dataPeminjaman = Peminjaman::with('barang')
+                            ->where('status', 'belum kembali')
+                            ->whereBetween('tgl_pinjam', [$request->tgl_from, $request->tgl_to])
+                            ->get();
+
+        $pdf = PDF::loadView('pdf/cetak-data-peminjaman', [
+            'peminjamans' => $dataPeminjaman,
+            'tanggal' => $request
+        ]);
+        return $pdf->stream('data-peminjaman-barang.pdf');
+    }
+
+    public function cetakPeminjamanHistory(Request $request)
+    {
+        $dataPeminjaman = Peminjaman::with('barang')
+                            ->where('status', 'sudah kembali')
+                            ->whereBetween('tgl_pinjam', [$request->tgl_from, $request->tgl_to])
+                            ->get();
+
+        $pdf = PDF::loadView('pdf/cetak-data-peminjaman', [
+            'peminjamans' => $dataPeminjaman,
+            'tanggal' => $request
+        ]);
+        return $pdf->stream('data-peminjaman-barang.pdf');
+    }
 }

@@ -13,6 +13,12 @@
                     <div class="card-body p-4">
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Peminjam</h5>
+                            @can('isStaffGudang')
+                                <button type="button" class="btn btn-outline-secondary m-1" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Cetak
+                                </button>
+                            @endcan
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle" id="dataTable">
@@ -94,4 +100,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/peminjaman/belum-kembali-cetak" method="get">
+                    {{-- @csrf --}}
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Masukan Periode</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="tgl_from" class="form-label">Dari Tanggal</label>
+                            <input type="date" class="form-control" name="tgl_from" id="from" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tgl_to" class="form-label">Sampai Tanggal</label>
+                            <input type="date" class="form-control" name="tgl_to" id="to" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script></script>
 @endsection
