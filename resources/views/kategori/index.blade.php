@@ -6,13 +6,6 @@
                 <div class="card w-100">
                     <div class="card-body p-4">
 
-                        {{-- @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ session('success') }}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif --}}
-
                         <div class="d-flex inline justify-content-between">
                             <h5 class="card-title fw-semibold mb-4">Tabel Data Kategori</h5>
 
@@ -29,7 +22,8 @@
                                         <th>No.</th>
                                         <th>Nama Kategori</th>
                                         <th>Kode kategori</th>
-                                        <th>Ada di Jurusan</th>
+                                        <th>Jurusan</th>
+                                        <th>Jumlah Barang</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -40,6 +34,7 @@
                                             <td>{{ $kategori->kategori_name }}</td>
                                             <td>{{ $kategori->kategori_code }}</td>
                                             <td>{{ $kategori->jurusan->jurusan_name }}</td>
+                                            <td>{{ $kategori->barang_count }}</td>
                                             <td class="d-flex inline">
                                                 <a href="/kategoris/{{ $kategori->id }}/edit">
                                                     <button type="button" class="btn btn-outline-warning m-1"><i
