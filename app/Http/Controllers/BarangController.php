@@ -61,6 +61,7 @@ class BarangController extends Controller
         $validatedData['barang_code'] = $kodeBarangFix;
         $validatedData['status'] = 'tersedia';
         $validatedData['kondisi'] = 'baik';
+        $validatedData['spesifikasi'] = $request->spesifikasi;
         $validatedData['tgl_masuk'] = Carbon::now()->format('Y-m-d');
 
         Barang::create($validatedData);
@@ -75,7 +76,8 @@ class BarangController extends Controller
         $peminjamanDetail =  PeminjamanDetail::with('peminjaman')->where('barang_id', $barang->id)->get();
         
         return view("barang/show", [
-            'peminjamans' => $peminjamanDetail
+            'peminjamans' => $peminjamanDetail,
+            'barang' => $barang
         ]);
 
 
@@ -104,6 +106,7 @@ class BarangController extends Controller
             'status' => 'required',
             'kondisi' => 'required',
         ]);
+        $validatedData['spesifikasi'] = $request->spesifikasi;
 
         Barang::where('id', $barang->id)->update($validatedData);
         return redirect('barangs')->with('success', 'Berhasil Update Barang');

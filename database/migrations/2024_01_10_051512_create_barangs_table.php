@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kondisi', '25');
             $table->date('tgl_masuk');
             $table->foreignId('kategori_id');
+            $table->text('spesifikasi')->nullable();
             $table->timestamps();
         });
     }

@@ -50,6 +50,10 @@
                                     <option value="hilang"> Hilang </option>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="spesifikasi" class="form-label">Spesifikasi Barang</label>
+                                <textarea class="form-control" id="spesifikasi" name="spesifikasi" rows="3">{{ $barangs->spesifikasi }}</textarea>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
 

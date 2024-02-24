@@ -19,7 +19,10 @@
                                 <label for="barang_name" class="form-label">Nama Barang</label>
                                 <input type="text" class="form-control" name="barang_name" id="barang_name" required>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="spesifikasi" class="form-label">Spesifikasi Barang</label>
+                                <textarea class="form-control" id="spesifikasi" name="spesifikasi" rows="3"></textarea>
+                            </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
