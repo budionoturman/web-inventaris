@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Nette\Utils\Strings;
 
 use function Laravel\Prompts\select;
+use function PHPSTORM_META\map;
 
 class PdfController extends Controller
 {
@@ -29,103 +30,104 @@ class PdfController extends Controller
 
     public function cetakBarangs(Request $request)
     {
-        $dataBarangSemua = DB::table('barangs as B')
-                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                        ->get();
+        $kategori_id = $request->kategori_id;
+        $kondisi = $request->kondisi;
+
+        // $data = Jurusan::with(['kategori' => function($query) use($kategori_id) {
+        //                     $query->where('id', $kategori_id);
+        //                 } , 'kategori.barang' => function($query) use($kondisi) {
+        //                     $query->where('kondisi', $kondisi);
+        //                 }])
+        //         ->Where('id', $request->jurusan_id)
+        //         ->get();
+
+        $dataBarangSemua = Jurusan::with(['kategori', 'kategori.barang'])->get();
+
+        $dataBarangByJurusan =  Jurusan::with(['kategori', 'kategori.barang'])->where('id', $request->jurusan_id)->get();
         
-        $dataBarangByJurusan = DB::table('barangs as B')
-                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                ->where('J.id', '=', $request->jurusan_id)
-                                ->get();
-        
-        $dataBarangByKategori = DB::table('barangs as B')
-                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                ->where('K.id', '=', $request->kategori_id)
+        $dataBarangByKategori = Jurusan::with(['kategori' => function($query) use($kategori_id) {
+                                            $query->where('id', $kategori_id);
+                                        } , 'kategori.barang'])
                                 ->get();
 
-        $dataBarangByKondisi = DB::table('barangs as B')
-                                ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                ->where('B.kondisi', '=', $request->kondisi)
+        $dataBarangByKondisi =Jurusan::with(['kategori', 'kategori.barang' => function($query) use($kondisi) {
+                                            $query->where('kondisi', $kondisi);
+                                        }])
                                 ->get();
         
-        $dataBarangByJurusanAndKategori = DB::table('barangs as B')
-                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                        ->where('J.id', '=', $request->jurusan_id)
-                                        ->where('K.id', '=', $request->kategori_id)
+        $dataBarangByJurusanAndKategori = Jurusan::with(['kategori' => function($query) use($kategori_id) {
+                                                    $query->where('id', $kategori_id);
+                                                } , 'kategori.barang'])
+                                        ->Where('id', $request->jurusan_id)
                                         ->get();
 
-        $dataBarangByKondisiAndKategori = DB::table('barangs as B')
-                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                        ->where('B.kondisi', '=', $request->kondisi)
-                                        ->where('K.id', '=', $request->kategori_id)
+        $dataBarangByKondisiAndKategori = Jurusan::with(['kategori' => function($query) use($kategori_id) {
+                                                    $query->where('id', $kategori_id);
+                                                } , 'kategori.barang' => function($query) use($kondisi) {
+                                                    $query->where('kondisi', $kondisi);
+                                                }])
                                         ->get();
                                 
-        $dataBarangByJurusanAndKondisi = DB::table('barangs as B')
-                                        ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                        ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                        ->where('J.id', '=', $request->jurusan_id)
-                                        ->where('B.kondisi', '=', $request->kondisi)
+        $dataBarangByJurusanAndKondisi = Jurusan::with(['kategori', 'kategori.barang' => function($query) use($kondisi) {
+                                                    $query->where('kondisi', $kondisi);
+                                                }])
+                                        ->Where('id', $request->jurusan_id)
                                         ->get();
         
-        $dataBarangByJurusanAndKondisiAndKategori = DB::table('barangs as B')
-                                                    ->join('kategoris as K', 'B.kategori_id', '=', 'K.id')
-                                                    ->join('jurusans as J', 'K.jurusan_id', '=', 'J.id')
-                                                    ->where('J.id', '=', $request->jurusan_id)
-                                                    ->where('K.id', '=', $request->kategori_id)
-                                                    ->where('B.kondisi', '=', $request->kondisi)
+        $dataBarangByJurusanAndKondisiAndKategori = Jurusan::with(['kategori' => function($query) use($kategori_id) {
+                                                                $query->where('id', $kategori_id);
+                                                            } , 'kategori.barang' => function($query) use($kondisi) {
+                                                                $query->where('kondisi', $kondisi);
+                                                            }])
+                                                    ->Where('id', $request->jurusan_id)
                                                     ->get();
+
         if($request->jurusan_id != null && $request->kondisi != null && $request->kategori_id != null) {
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByJurusanAndKondisiAndKategori
+                'jurusans' => $dataBarangByJurusanAndKondisiAndKategori
             ]);
             return $pdf->stream('data-barang.pdf');
         } elseif($request->jurusan_id != null && $request->kategori_id != null) {
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByJurusanAndKategori
+                'jurusans' => $dataBarangByJurusanAndKategori
             ]);
             return $pdf->stream('data-barang.pdf');
         } elseif($request->kondisi != null && $request->kategori_id != null) {
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByKondisiAndKategori
+                'jurusans' => $dataBarangByKondisiAndKategori
             ]);
             return $pdf->stream('data-barang.pdf');
         } elseif ($request->jurusan_id != null && $request->kondisi != null) {
             // return "by kategori dan kondisi";
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByJurusanAndKondisi
+                'jurusans' => $dataBarangByJurusanAndKondisi
             ]);
             return $pdf->stream('data-barang.pdf');
 
         } elseif ($request->jurusan_id != null) {
             // return "by jurusan";
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByJurusan
+                'jurusans' => $dataBarangByJurusan
             ]);
             return $pdf->stream('data-barang.pdf');
 
         } elseif($request->kategori_id != null) {
             // return "by kategori";
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByKategori
+                'jurusans' => $dataBarangByKategori
             ]);
             return $pdf->stream('data-barang.pdf');
         } elseif ($request->kondisi != null) {
             // return "by  kondisi";
             $pdf = PDF::loadView('pdf/cetak-barang', [
-                'barangs' => $dataBarangByKondisi
+                'jurusans' => $dataBarangByKondisi
             ]);
             return $pdf->stream('data-barang.pdf');
         }
 
         // return "semua ";
         $pdf = PDF::loadView('pdf/cetak-barang', [
-            'barangs' => $dataBarangSemua
+            'jurusans' => $dataBarangSemua,
         ]);
         return $pdf->stream('data-barang.pdf');
     }

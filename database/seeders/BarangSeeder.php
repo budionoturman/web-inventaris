@@ -17,7 +17,7 @@ class BarangSeeder extends Seeder
     {
         DB::table('barangs')->insert([
             [
-                'barang_code' => 'TKJ/RTR/1',
+                'barang_code' => 'TK/RTR/1',
                 'barang_name' => 'TP-LINK GRID',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -28,7 +28,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'barang_code' => 'TKJ/RTR/2',
+                'barang_code' => 'TK/RTR/2',
                 'barang_name' => 'TP-LINK OMNI',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -40,7 +40,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'barang_code' => 'TKJ/RTR/3',
+                'barang_code' => 'TK/RTR/3',
                 'barang_name' => 'TP-LINK 2,4 GHZ',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -72,7 +72,7 @@ class BarangSeeder extends Seeder
 
         for($i = 4; $i < 14; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/SWC/'.$i,
+                'barang_code' => 'TK/SWC/'.$i,
                 'barang_name' => 'TP-LINK SWITCH 5 PORT',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -90,7 +90,7 @@ class BarangSeeder extends Seeder
         
         for($i = 14; $i < 19; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/SWC/'.$i,
+                'barang_code' => 'TK/SWC/'.$i,
                 'barang_name' => 'TP-LINK SWITCH 8 PORT',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -114,7 +114,7 @@ class BarangSeeder extends Seeder
 
         for($i = 19; $i < 30; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/SWC/'.$i,
+                'barang_code' => 'TK/SWC/'.$i,
                 'barang_name' => 'D-LINK WIRELES N 150 MBPS',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -129,7 +129,7 @@ class BarangSeeder extends Seeder
         }
 
         Barang::create([
-            'barang_code' => 'TKJ/SWC/30',
+            'barang_code' => 'TK/SWC/30',
             'barang_name' => 'D-LINK SWITCH DES-1024A 24 PORT',
             'status' => 'tersedia',
             'kondisi' => 'baik',
@@ -146,7 +146,7 @@ class BarangSeeder extends Seeder
 
         for($i = 31; $i < 36; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/RTR/'.$i,
+                'barang_code' => 'TK/RTR/'.$i,
                 'barang_name' => 'MIKROTIK ROUTERBOARD 750',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -158,7 +158,7 @@ class BarangSeeder extends Seeder
         
         for($i = 36; $i < 46; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/RTR/'.$i,
+                'barang_code' => 'TK/RTR/'.$i,
                 'barang_name' => 'MIKROTIK ROUTERBOARD 941',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',
@@ -170,7 +170,7 @@ class BarangSeeder extends Seeder
 
         for($i = 46; $i < 76; $i++) {
             Barang::create([
-                'barang_code' => 'TKJ/MNR/'.$i,
+                'barang_code' => 'TK/MNR/'.$i,
                 'barang_name' => 'LAYAR MONITOR LG',
                 'status' => 'tersedia',
                 'kondisi' => 'baik',

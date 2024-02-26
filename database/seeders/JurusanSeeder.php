@@ -15,7 +15,7 @@ class JurusanSeeder extends Seeder
     {
         Jurusan::create([
             'jurusan_name' => 'Teknik Komputer dan Jaringan',
-            'jurusan_code' => 'TKJ'
+            'jurusan_code' => 'TK'
         ]);
         
         Jurusan::create([
