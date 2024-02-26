@@ -43,57 +43,59 @@
             SMK Avicena Rajeg <br>
             {{ Carbon\Carbon::now()->format('d-M-Y') }} <br>
         </h3>
-        <table id="customers">
-            <tr>
-                <th>Jurusan</th>
-                <th>Kategori</th>
-                <th>Nama barang</th>
-                <th>Kode Barang</th>
-                <th>Status</th>
-            </tr>
-            @php
-                $seen = []; // Array to keep track of seen values
-            @endphp
-            @foreach ($jurusans as $jurusan)
-                <!-- Output jurusan information -->
+        @foreach ($jurusans as $jurusan)
+            <h3>
+                {{ $jurusan->jurusan_name }}
+            </h3>
+            <table id="customers">
                 <tr>
-                    <td colspan="6">{{ $jurusan->jurusan_name }}</td>
+                    <th>Kategori</th>
+                    <th>Nama barang</th>
+                    <th>Kode Barang</th>
+                    <th>Status</th>
                 </tr>
+                @php
+                    $seen = []; // Array to keep track of seen values
+                @endphp
+                @foreach ($jurusans as $jurusan)
+                    <!-- Output jurusan information -->
+                    {{-- <tr>
+                        <td colspan="6">{{ $jurusan->jurusan_name }}</td>
+                    </tr> --}}
 
-                <!-- Loop through each kategori related to this jurusan -->
-                @foreach ($jurusan->kategori as $kategori)
-                    <tr>
-                        <td></td>
-                        <td colspan="5">{{ $kategori->kategori_name }}</td>
-                    </tr>
-                    @foreach ($kategori->barang as $barang)
+                    <!-- Loop through each kategori related to this jurusan -->
+                    @foreach ($jurusan->kategori as $kategori)
+                        <tr>
+                            <td colspan="5">{{ $kategori->kategori_name }}</td>
+                        </tr>
+                        @foreach ($kategori->barang as $barang)
+                            <tr>
+                                <td></td>
+                                <td>
+                                    @if (!in_array($barang->barang_name, $seen))
+                                        <!-- Display the distinct value -->
+                                        {{ $barang->barang_name }}
+
+                                        <!-- Add the value to the seen array -->
+                                        @php
+                                            $seen[] = $barang->barang_name;
+                                        @endphp
+                                    @endif
+                                </td>
+                                <td>{{ $barang->barang_code }}</td>
+                                <td>{{ $barang->status }}</td>
+                            </tr>
+                        @endforeach
                         <tr>
                             <td></td>
-                            <td></td>
-                            <td>
-                                @if (!in_array($barang->barang_name, $seen))
-                                    <!-- Display the distinct value -->
-                                    {{ $barang->barang_name }}
-
-                                    <!-- Add the value to the seen array -->
-                                    @php
-                                        $seen[] = $barang->barang_name;
-                                    @endphp
-                                @endif
-                            </td>
-                            <td>{{ $barang->barang_code }}</td>
-                            <td>{{ $barang->status }}</td>
+                            <td colspan="2">Jumlah Barang : </td>
+                            <td>{{ $kategori->barang->count() }}</td>
                         </tr>
                     @endforeach
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">Jumlah Barang : </td>
-                        <td>{{ $kategori->barang->count() }}</td>
-                    </tr>
                 @endforeach
-            @endforeach
-        </table>
+            </table>
+        @endforeach
+
     </body>
 
 </html>
